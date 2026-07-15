@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="吃什么">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#007aff">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23007aff'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='100'%3E🍽️%3C/text%3E%3C/svg%3E">
+<title>一会儿吃什么？</title>
+<style>
+:root {
+  --bg: #f2f2f7;
+  --card-bg: #ffffff;
+  --text: #1c1c1e;
+  --text-secondary: #8e8e93;
+  --text-tertiary: #aeaeb2;
+  --accent: #007aff;
+  --accent-hover: #0056cc;
+  --green: #34c759;
+  --red: #ff3b30;
+  --orange: #ff9500;
+  --tab-bg: #ffffffcc;
+  --border: #e5e5ea;
+  --nav-height: 50px;
+  --safe-bottom: 20px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 14px;
+  --radius-sm: 10px;
+}
+
+[data-theme="dark"] {
+  --bg: #000000;
+  --card-bg: #1c1c1e;
+  --text: #f5f5f7;
+  --text-secondary: #8e8e93;
+  --text-tertiary: #636366;
+  --accent: #0a84ff;
+  --accent-hover: #409cff;
+  --tab-bg: #1c1c1ee6;
+  --border: #38383a;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header {
+  padding: 16px 20px 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.header-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px 80px;
+}
+
+.page {
+  display: none;
+  animation: fadeIn 0.25s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--tab-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 0.5px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 0 var(--safe-bottom);
+  z-index: 100;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 4px 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-family: inherit;
+}
+
+.tab-item .tab-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.tab-item.active {
+  color: var(--accent);
+}
+
+.tab-item:active {
+  opacity: 0.5;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+
+.scene-selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scene-selector::-webkit-scrollbar { display: none; }
+
+.scene-chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.scene-chip.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.scene-chip:active {
+  transform: scale(0.95);
+}
+
+.decide-btn {
+  display: block;
+  width: 100%;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  margin-bottom: 16px;
+}
+
+.decide-btn:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.decide-btn.thinking {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+.decide-btn:disabled {
+  opacity: 0.6;
+}
+
+.home-stats {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.quick-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.quick-cat-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.quick-cat-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.quick-cat-btn .cat-emoji { font-size: 26px; }
+.quick-cat-btn .cat-label { font-size: 12px; color: var(--text-secondary); }
+
+#recommend-view { display: none; }
+
+.recommend-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.result-tip {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.result-emoji {
+  font-size: 72px;
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.result-name {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.result-meta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.result-meta span {
+  padding: 4px 12px;
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.result-tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.result-scene {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.recommend-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.recommend-actions button {
+  flex: 1;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.recommend-actions button:active {
+  transform: scale(0.97);
+}
+
+.btn-accept { background: var(--green); color: white; }
+.btn-retry { background: var(--card-bg); color: var(--text); border: 1px solid var(--border) !important; }
+
+#recommend-animation {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.slot-item {
+  text-align: center;
+  animation: slotBounce 0.08s ease;
+}
+
+.slot-emoji { font-size: 64px; display: block; margin-bottom: 8px; }
+.slot-name { font-size: 20px; font-weight: 600; }
+
+@keyframes slotBounce {
+  0% { transform: translateY(-4px); opacity: 0.7; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.result-enter {
+  animation: resultPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes resultPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.onboarding-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  margin-top: 40px;
+}
+
+.onboarding-title { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.onboarding-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
+
+.taste-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.taste-btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.taste-btn.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.taste-btn:active { transform: scale(0.95); }
+.taste-btn.small { padding: 6px 12px; font-size: 13px; }
+
+.onboarding-select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 15px;
+  color: var(--text);
+  font-family: inherit;
+  margin-bottom: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238e8e93' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.btn-primary:active { transform: scale(0.97); opacity: 0.9; }
+
+.manage-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.manage-toolbar input {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 14px;
+  color: var(--text);
+  font-family: inherit;
+}
+
+.manage-toolbar select {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 14px;
+  color: var(--text);
+  font-family: inherit;
+}
+
+.manage-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.btn-secondary {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.btn-secondary:active { opacity: 0.7; transform: scale(0.97); }
+
+.btn-danger {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.manage-selection-bar {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.manage-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--card-bg);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.manage-card.selected { border-color: var(--accent); }
+.manage-card:active { transform: scale(0.98); }
+.manage-card-left { display: flex; align-items: center; gap: 10px; }
+.manage-card-emoji { font-size: 28px; width: 36px; text-align: center; }
+.manage-card-info { display: flex; flex-direction: column; gap: 1px; }
+.manage-card-name { font-size: 15px; font-weight: 500; }
+.manage-card-meta { font-size: 12px; color: var(--text-secondary); }
+.manage-card-tags { display: flex; gap: 3px; margin-top: 2px; }
+.mini-tag { font-size: 12px; }
+.manage-card-actions { display: flex; gap: 4px; }
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.btn-icon:active { background: var(--border); }
+
+.history-section { margin-bottom: 20px; }
+.history-date { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; padding: 0 2px; }
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--card-bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  box-shadow: var(--shadow);
+}
+
+.history-emoji { font-size: 24px; }
+.history-info { display: flex; flex-direction: column; gap: 1px; }
+.history-name { font-size: 15px; font-weight: 500; }
+.history-meta { font-size: 12px; color: var(--text-secondary); }
+
+.settings-group { margin-bottom: 20px; }
+.settings-label { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--card-bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  box-shadow: var(--shadow);
+}
+
+.settings-row-label { font-size: 15px; }
+.settings-row-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+.toggle { position: relative; width: 50px; height: 30px; cursor: pointer; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--text-tertiary);
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle input:checked + .toggle-slider { background: var(--green); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+.settings-select {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+}
+
+.settings-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  justify-content: center;
+  align-items: flex-end;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: var(--radius) var(--radius) 0 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 20px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title { font-size: 18px; font-weight: 700; }
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg);
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.form-group { margin-bottom: 14px; }
+.form-label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 15px;
+  color: var(--text);
+  font-family: inherit;
+}
+
+.form-input:focus { outline: none; border-color: var(--accent); }
+.form-row { display: flex; gap: 10px; }
+.form-row .form-group { flex: 1; }
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.modal-actions button:active { transform: scale(0.97); }
+.btn-modal-cancel { background: var(--bg); color: var(--text); }
+.btn-modal-save { background: var(--accent); color: white; }
+
+.batch-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.batch-modal-overlay.active { display: flex; }
+
+.batch-content {
+  background: var(--card-bg);
+  border-radius: var(--radius) var(--radius) 0 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  animation: slideUp 0.3s ease;
+}
+
+.batch-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.batch-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+  z-index: 300;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.tag-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-group label {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.radio-group input[type="radio"] { display: none; }
+.radio-group input[type="radio"]:checked + label { background: var(--accent); color: white; border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; }
+}
+
+@media (min-width: 481px) {
+  .app-container { border-left: 0.5px solid var(--border); border-right: 0.5px solid var(--border); }
+}
+
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <div class="header">
+    <h1>🍽️ 一会儿吃什么？</h1>
+    <div class="header-sub" id="home-stats">加载中...</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- ====== Home Page ====== -->
+    <div class="page active" id="page-home">
+      <div id="home-content">
+        <div class="scene-selector" id="scene-selector">
+          <button class="scene-chip active" data-scene="随便吃">🤷 随便吃</button>
+          <button class="scene-chip" data-scene="想吃爽一点">😋 想吃爽</button>
+          <button class="scene-chip" data-scene="健康模式">🥗 健康</button>
+          <button class="scene-chip" data-scene="省钱模式">💰 省钱</button>
+          <button class="scene-chip" data-scene="很累模式">😴 很累</button>
+          <button class="scene-chip" data-scene="聚餐模式">👥 聚餐</button>
+        </div>
+
+        <button class="decide-btn" id="btn-decide">🎲 帮我决定</button>
+        <div class="home-stats" id="home-stats-extra"></div>
+
+        <div class="quick-categories">
+          <button class="quick-cat-btn" data-cat="中餐"><span class="cat-emoji">🥟</span><span class="cat-label">中餐</span></button>
+          <button class="quick-cat-btn" data-cat="火锅"><span class="cat-emoji">🫕</span><span class="cat-label">火锅</span></button>
+          <button class="quick-cat-btn" data-cat="快餐"><span class="cat-emoji">🍔</span><span class="cat-label">快餐</span></button>
+          <button class="quick-cat-btn" data-cat="面食"><span class="cat-emoji">🍜</span><span class="cat-label">面食</span></button>
+          <button class="quick-cat-btn" data-cat="日料"><span class="cat-emoji">🍣</span><span class="cat-label">日料</span></button>
+          <button class="quick-cat-btn" data-cat="韩餐"><span class="cat-emoji">🥩</span><span class="cat-label">韩餐</span></button>
+          <button class="quick-cat-btn" data-cat="简餐"><span class="cat-emoji">🥗</span><span class="cat-label">简餐</span></button>
+        </div>
+      </div>
+
+      <div id="recommend-view">
+        <div id="recommend-animation">
+          <div class="slot-item">
+            <span class="slot-emoji">🤔</span>
+            <span class="slot-name">思考中...</span>
+          </div>
+        </div>
+        <div id="recommend-result" style="display:none">
+          <div class="recommend-card">
+            <div class="result-tip" id="result-tip"></div>
+            <span class="result-emoji" id="result-emoji">🍽️</span>
+            <div class="result-name" id="result-name">加载中</div>
+            <div class="result-meta">
+              <span id="result-category">分类</span>
+              <span id="result-taste">口味</span>
+            </div>
+            <div class="result-tags" id="result-tags"></div>
+            <div class="result-scene" id="result-scene"></div>
+          </div>
+          <div class="recommend-actions">
+            <button class="btn-accept" id="btn-accept">✅ 就吃这个</button>
+            <button class="btn-retry" id="btn-retry">🔄 换一个</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== Onboarding Page ====== -->
+    <div class="page" id="page-onboarding">
+      <div class="onboarding-card">
+        <div class="onboarding-title">👋 你好！</div>
+        <div class="onboarding-sub">先告诉我你的口味偏好，开始我们的美食之旅～</div>
+        <div class="settings-label" style="margin-bottom:8px;text-transform:none">你喜欢的口味（可多选）</div>
+        <div class="taste-grid" id="onboarding-tastes"></div>
+        <div class="settings-label" style="margin-bottom:8px;text-transform:none;margin-top:8px">默认场景</div>
+        <select class="onboarding-select" id="onboarding-scene">
+          <option value="随便吃">🤷 随便吃</option>
+          <option value="想吃爽一点">😋 想吃爽一点</option>
+          <option value="健康模式">🥗 健康模式</option>
+          <option value="省钱模式">💰 省钱模式</option>
+          <option value="很累模式">😴 很累模式</option>
+          <option value="聚餐模式">👥 聚餐模式</option>
+        </select>
+        <button class="btn-primary" id="btn-onboarding-done">开始使用 🚀</button>
+      </div>
+    </div>
+
+    <!-- ====== Manage Page ====== -->
+    <div class="page" id="page-manage">
+      <div class="manage-toolbar">
+        <input type="text" id="manage-search" placeholder="🔍 搜索餐品..." autocomplete="off">
+        <select id="manage-category-filter"><option value="all">全部分类</option></select>
+      </div>
+      <div class="manage-actions">
+        <button class="btn-secondary" id="btn-add-food">➕ 新增</button>
+        <button class="btn-secondary" id="btn-batch-tags">🏷️ 批量标签</button>
+        <button class="btn-secondary" id="btn-manage-export">📤 导出选中</button>
+      </div>
+      <div class="manage-selection-bar">
+        <span>已选 <strong id="manage-selected-count">0</strong> 项</span>
+      </div>
+      <div class="manage-list" id="manage-list"></div>
+    </div>
+
+    <!-- ====== History Page ====== -->
+    <div class="page" id="page-history">
+      <div id="history-list"></div>
+    </div>
+
+    <!-- ====== Settings Page ====== -->
+    <div class="page" id="page-settings">
+      <div class="settings-group">
+        <div class="settings-label">口味偏好</div>
+        <div class="card">
+          <div class="taste-grid" id="settings-tastes"></div>
+          <div style="margin-top:12px">
+            <label class="settings-label" style="text-transform:none;margin-bottom:4px">默认场景</label>
+            <select class="settings-select" id="settings-scene">
+              <option value="随便吃">🤷 随便吃</option>
+              <option value="想吃爽一点">😋 想吃爽一点</option>
+              <option value="健康模式">🥗 健康模式</option>
+              <option value="省钱模式">💰 省钱模式</option>
+              <option value="很累模式">😴 很累模式</option>
+              <option value="聚餐模式">👥 聚餐模式</option>
+            </select>
+          </div>
+          <button class="btn-primary" id="btn-save-prefs" style="margin-top:12px">保存偏好</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">显示</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-label">深色模式</div>
+            <div class="settings-row-desc">切换深色/浅色主题</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">提示语风格</div>
+        <div class="card">
+          <div class="radio-group">
+            <input type="radio" name="tipMode" id="tip-gentle" value="gentle">
+            <label for="tip-gentle">🌸 温柔</label>
+            <input type="radio" name="tipMode" id="tip-funny" value="funny">
+            <label for="tip-funny">😂 搞笑</label>
+            <input type="radio" name="tipMode" id="tip-mean" value="mean">
+            <label for="tip-mean">😈 毒舌</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">数据管理</div>
+        <div class="settings-actions">
+          <button class="btn-secondary" id="btn-clear-history">🗑️ 清空历史记录</button>
+          <button class="btn-secondary" id="btn-export-data">📤 导出全部数据</button>
+          <button class="btn-secondary" id="btn-import-data">📥 导入数据</button>
+          <input type="file" id="import-file" accept=".json" style="display:none">
+          <button class="btn-danger" id="btn-reset-data">⚠️ 重置所有数据</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="tab-item active" data-page="home"><span class="tab-icon">🏠</span>首页</button>
+    <button class="tab-item" data-page="manage"><span class="tab-icon">📋</span>管理</button>
+    <button class="tab-item" data-page="history"><span class="tab-icon">📜</span>历史</button>
+    <button class="tab-item" data-page="settings"><span class="tab-icon">⚙️</span>设置</button>
+  </nav>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">新增餐品</div>
+      <button class="modal-close" id="btn-modal-close">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex:3">
+        <label class="form-label">名称</label>
+        <input class="form-input" id="food-name" placeholder="如：宫保鸡丁" autocomplete="off">
+      </div>
+      <div class="form-group" style="flex:1">
+        <label class="form-label">Emoji</label>
+        <input class="form-input" id="food-emoji" placeholder="🍗" autocomplete="off">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">分类</label>
+        <select class="form-input" id="food-category">
+          <option>中餐</option><option>火锅</option><option>快餐</option>
+          <option>面食</option><option>日料</option><option>韩餐</option><option>简餐</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">口味</label>
+        <select class="form-input" id="food-taste">
+          <option>清淡</option><option>辣</option><option>麻辣</option>
+          <option>酸甜</option><option>酸辣</option><option>甜辣</option>
+          <option>咸</option><option>酸</option><option>甜</option><option>甜咸</option><option>清甜</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">场景</label>
+        <select class="form-input" id="food-scene">
+          <option>随便吃</option><option>想吃爽一点</option><option>健康模式</option>
+          <option>省钱模式</option><option>很累模式</option><option>聚餐模式</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">餐时</label>
+        <select class="form-input" id="food-mealtime">
+          <option>早餐</option><option>午餐</option><option>下午茶</option><option>晚餐</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">价格等级</label>
+        <select class="form-input" id="food-price">
+          <option value="1">💰 便宜</option>
+          <option value="2">💰💰 中等</option>
+          <option value="3">💰💰💰 较贵</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">权重 (1-10)</label>
+        <input class="form-input" id="food-weight" type="number" min="1" max="10" value="8">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">标签（可多选）</label>
+      <div class="tag-select" id="food-tags"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" id="btn-modal-cancel">取消</button>
+      <button class="btn-modal-save" id="btn-modal-save">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="batch-modal-overlay" id="batch-modal-overlay">
+  <div class="batch-content">
+    <div class="modal-header">
+      <div class="modal-title">批量修改标签</div>
+      <button class="modal-close" onclick="this.closest('.batch-modal-overlay').classList.remove('active')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">操作</label>
+      <select class="form-input" id="batch-action">
+        <option value="add">添加标签</option>
+        <option value="remove">移除标签</option>
+        <option value="replace">替换为选中标签</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">选择标签</label>
+      <div class="tag-select" id="batch-tag-list"></div>
+    </div>
+    <div class="batch-actions">
+      <button class="btn-modal-cancel" id="btn-batch-cancel">取消</button>
+      <button class="btn-modal-save" id="btn-batch-save">应用</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== 餐品数据（110种） ======
+var FOODS_DATA = [
+  {"id":"f001","name":"宫保鸡丁","category":"中餐","tags":["spicy","meat","rice"],"taste":"辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍗","weight":10},
+  {"id":"f002","name":"麻婆豆腐","category":"中餐","tags":["spicy","numb","rice"],"taste":"麻辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🫘","weight":9},
+  {"id":"f003","name":"鱼香肉丝","category":"中餐","tags":["sweet","sour","rice"],"taste":"酸甜","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥓","weight":9},
+  {"id":"f004","name":"水煮鱼","category":"中餐","tags":["spicy","numb","seafood","rice"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":8},
+  {"id":"f005","name":"回锅肉","category":"中餐","tags":["spicy","meat","rice"],"taste":"辣","scene":"想吃爽一点","mealTime":"午餐","priceLevel":1,"emoji":"🥩","weight":9},
+  {"id":"f006","name":"番茄炒蛋","category":"中餐","tags":["sweet","light","rice"],"taste":"酸甜","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍅","weight":10},
+  {"id":"f007","name":"红烧排骨","category":"中餐","tags":["salty","meat","rice"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":2,"emoji":"🍖","weight":8},
+  {"id":"f008","name":"糖醋里脊","category":"中餐","tags":["sweet","sour","meat","rice"],"taste":"酸甜","scene":"想吃爽一点","mealTime":"午餐","priceLevel":2,"emoji":"🥩","weight":8},
+  {"id":"f009","name":"干锅牛蛙","category":"中餐","tags":["spicy","meat","heavy"],"taste":"辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🐸","weight":7},
+  {"id":"f010","name":"清蒸鲈鱼","category":"中餐","tags":["light","seafood","rice","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":8},
+  {"id":"f011","name":"东坡肉","category":"中餐","tags":["salty","meat","rice","heavy"],"taste":"咸","scene":"想吃爽一点","mealTime":"午餐","priceLevel":2,"emoji":"🥩","weight":7},
+  {"id":"f012","name":"酸菜鱼","category":"中餐","tags":["sour","spicy","seafood","soup"],"taste":"酸辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":9},
+  {"id":"f013","name":"宫保虾球","category":"中餐","tags":["spicy","seafood","rice"],"taste":"辣","scene":"随便吃","mealTime":"午餐","priceLevel":2,"emoji":"🦐","weight":7},
+  {"id":"f014","name":"小炒肉","category":"中餐","tags":["spicy","meat","rice"],"taste":"辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥓","weight":9},
+  {"id":"f015","name":"地三鲜","category":"中餐","tags":["light","veggie","rice"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":1,"emoji":"🍆","weight":8},
+  {"id":"f016","name":"青椒肉丝","category":"中餐","tags":["salty","meat","rice"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🌶️","weight":9},
+  {"id":"f017","name":"醋溜土豆丝","category":"中餐","tags":["sour","veggie","rice"],"taste":"酸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥔","weight":9},
+  {"id":"f018","name":"红烧肉","category":"中餐","tags":["salty","meat","rice","heavy"],"taste":"咸","scene":"想吃爽一点","mealTime":"午餐","priceLevel":2,"emoji":"🥩","weight":8},
+  {"id":"f019","name":"蒜蓉西兰花","category":"中餐","tags":["light","veggie","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"晚餐","priceLevel":1,"emoji":"🥦","weight":7},
+  {"id":"f020","name":"葱爆羊肉","category":"中餐","tags":["salty","meat","rice"],"taste":"咸","scene":"随便吃","mealTime":"晚餐","priceLevel":2,"emoji":"🐑","weight":7},
+  {"id":"f021","name":"辣子鸡","category":"中餐","tags":["spicy","meat","heavy"],"taste":"辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🐔","weight":8},
+  {"id":"f022","name":"蛋炒饭","category":"中餐","tags":["salty","rice","fast"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":10},
+  {"id":"f023","name":"扬州炒饭","category":"中餐","tags":["salty","rice"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":9},
+  {"id":"f024","name":"皮蛋瘦肉粥","category":"中餐","tags":["salty","rice","soup","comfort"],"taste":"咸","scene":"很累模式","mealTime":"早餐","priceLevel":1,"emoji":"🥣","weight":9},
+  {"id":"f025","name":"白切鸡","category":"中餐","tags":["light","meat","rice"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":2,"emoji":"🐔","weight":7},
+  {"id":"f026","name":"北京烤鸭","category":"中餐","tags":["salty","meat","expensive"],"taste":"咸","scene":"聚餐模式","mealTime":"晚餐","priceLevel":3,"emoji":"🦆","weight":6},
+  {"id":"f027","name":"饺子","category":"中餐","tags":["salty","meat","soup"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥟","weight":10},
+  {"id":"f028","name":"馄饨","category":"中餐","tags":["salty","meat","soup","comfort"],"taste":"咸","scene":"很累模式","mealTime":"晚餐","priceLevel":1,"emoji":"🥟","weight":9},
+  {"id":"f029","name":"小笼包","category":"中餐","tags":["salty","meat","soup"],"taste":"咸","scene":"随便吃","mealTime":"早餐","priceLevel":1,"emoji":"🥟","weight":9},
+  {"id":"f030","name":"红烧牛腩","category":"中餐","tags":["salty","meat","rice"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":2,"emoji":"🐂","weight":8},
+  {"id":"f031","name":"麻辣火锅","category":"火锅","tags":["spicy","numb","hotpot","heavy"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🫕","weight":8},
+  {"id":"f032","name":"清汤火锅","category":"火锅","tags":["light","hotpot","soup"],"taste":"清淡","scene":"健康模式","mealTime":"晚餐","priceLevel":2,"emoji":"🥘","weight":7},
+  {"id":"f033","name":"番茄火锅","category":"火锅","tags":["sweet","sour","hotpot","soup"],"taste":"酸甜","scene":"随便吃","mealTime":"晚餐","priceLevel":2,"emoji":"🍅","weight":8},
+  {"id":"f034","name":"重庆老火锅","category":"火锅","tags":["spicy","numb","hotpot","heavy"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🔥","weight":8},
+  {"id":"f035","name":"潮汕牛肉火锅","category":"火锅","tags":["light","meat","hotpot","soup"],"taste":"清淡","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐂","weight":8},
+  {"id":"f036","name":"海底捞","category":"火锅","tags":["spicy","hotpot","soup"],"taste":"辣","scene":"聚餐模式","mealTime":"晚餐","priceLevel":3,"emoji":"🫕","weight":7},
+  {"id":"f037","name":"菌菇火锅","category":"火锅","tags":["light","veggie","hotpot","healthy","soup"],"taste":"清淡","scene":"健康模式","mealTime":"晚餐","priceLevel":2,"emoji":"🍄","weight":7},
+  {"id":"f038","name":"鱼火锅","category":"火锅","tags":["spicy","seafood","hotpot","soup"],"taste":"辣","scene":"随便吃","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":7},
+  {"id":"f039","name":"寿喜烧","category":"火锅","tags":["sweet","salty","meat","hotpot"],"taste":"甜咸","scene":"随便吃","mealTime":"晚餐","priceLevel":2,"emoji":"🍲","weight":7},
+  {"id":"f040","name":"椰子鸡火锅","category":"火锅","tags":["sweet","light","meat","hotpot","healthy","soup"],"taste":"清甜","scene":"健康模式","mealTime":"晚餐","priceLevel":2,"emoji":"🥥","weight":7},
+  {"id":"f041","name":"麦当劳","category":"快餐","tags":["salty","meat","fried","fast"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🍔","weight":8},
+  {"id":"f042","name":"肯德基","category":"快餐","tags":["salty","meat","fried","fast"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🍗","weight":8},
+  {"id":"f043","name":"汉堡王","category":"快餐","tags":["salty","meat","fried","fast"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🍔","weight":7},
+  {"id":"f044","name":"Subway","category":"快餐","tags":["light","veggie","fast","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":1,"emoji":"🥪","weight":7},
+  {"id":"f045","name":"沙县小吃","category":"快餐","tags":["salty","fast","cheap"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🥟","weight":10},
+  {"id":"f046","name":"兰州拉面","category":"快餐","tags":["salty","meat","soup","noodle","fast"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":10},
+  {"id":"f047","name":"黄焖鸡米饭","category":"快餐","tags":["salty","meat","rice","fast"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍗","weight":9},
+  {"id":"f048","name":"煲仔饭","category":"快餐","tags":["salty","meat","rice"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":8},
+  {"id":"f049","name":"麻辣烫","category":"快餐","tags":["spicy","veggie","soup","fast"],"taste":"辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥘","weight":10},
+  {"id":"f050","name":"螺蛳粉","category":"快餐","tags":["sour","spicy","noodle","soup","heavy"],"taste":"酸辣","scene":"想吃爽一点","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":8},
+  {"id":"f051","name":"凉皮","category":"快餐","tags":["sour","spicy","cold","fast","cheap"],"taste":"酸辣","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🥟","weight":8},
+  {"id":"f052","name":"肉夹馍","category":"快餐","tags":["salty","meat","fast","cheap"],"taste":"咸","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🥙","weight":9},
+  {"id":"f053","name":"煎饼果子","category":"快餐","tags":["salty","fast","cheap"],"taste":"咸","scene":"省钱模式","mealTime":"早餐","priceLevel":1,"emoji":"🥞","weight":9},
+  {"id":"f054","name":"酸辣粉","category":"快餐","tags":["sour","spicy","noodle","soup","fast"],"taste":"酸辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":9},
+  {"id":"f055","name":"手抓饼","category":"快餐","tags":["salty","fast","cheap"],"taste":"咸","scene":"省钱模式","mealTime":"早餐","priceLevel":1,"emoji":"🫓","weight":8},
+  {"id":"f056","name":"红烧牛肉面","category":"面食","tags":["salty","meat","noodle","soup"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":9},
+  {"id":"f057","name":"炸酱面","category":"面食","tags":["salty","meat","noodle"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍝","weight":8},
+  {"id":"f058","name":"担担面","category":"面食","tags":["spicy","meat","noodle","heavy"],"taste":"辣","scene":"想吃爽一点","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":8},
+  {"id":"f059","name":"热干面","category":"面食","tags":["salty","noodle","fast"],"taste":"咸","scene":"随便吃","mealTime":"早餐","priceLevel":1,"emoji":"🍜","weight":8},
+  {"id":"f060","name":"葱油拌面","category":"面食","tags":["salty","noodle","fast"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍝","weight":8},
+  {"id":"f061","name":"油泼面","category":"面食","tags":["spicy","noodle","heavy"],"taste":"辣","scene":"想吃爽一点","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":7},
+  {"id":"f062","name":"阳春面","category":"面食","tags":["light","noodle","soup","comfort"],"taste":"清淡","scene":"很累模式","mealTime":"晚餐","priceLevel":1,"emoji":"🍜","weight":8},
+  {"id":"f063","name":"刀削面","category":"面食","tags":["salty","meat","noodle","soup"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":8},
+  {"id":"f064","name":"乌冬面","category":"面食","tags":["light","noodle","soup","comfort"],"taste":"清淡","scene":"很累模式","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":7},
+  {"id":"f065","name":"意面","category":"面食","tags":["salty","meat","noodle"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍝","weight":7},
+  {"id":"f066","name":"寿司","category":"日料","tags":["light","seafood","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":2,"emoji":"🍣","weight":8},
+  {"id":"f067","name":"刺身","category":"日料","tags":["light","seafood","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"晚餐","priceLevel":3,"emoji":"🍣","weight":7},
+  {"id":"f068","name":"拉面","category":"日料","tags":["salty","meat","noodle","soup","comfort"],"taste":"咸","scene":"很累模式","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":9},
+  {"id":"f069","name":"鳗鱼饭","category":"日料","tags":["sweet","salty","seafood","rice"],"taste":"甜咸","scene":"随便吃","mealTime":"午餐","priceLevel":2,"emoji":"🍱","weight":7},
+  {"id":"f070","name":"天妇罗","category":"日料","tags":["light","seafood","fried"],"taste":"清淡","scene":"随便吃","mealTime":"午餐","priceLevel":2,"emoji":"🍤","weight":7},
+  {"id":"f071","name":"日式咖喱饭","category":"日料","tags":["salty","rice","comfort"],"taste":"咸","scene":"很累模式","mealTime":"午餐","priceLevel":1,"emoji":"🍛","weight":8},
+  {"id":"f072","name":"味增汤","category":"日料","tags":["salty","soup","light","healthy"],"taste":"咸","scene":"健康模式","mealTime":"晚餐","priceLevel":1,"emoji":"🍲","weight":7},
+  {"id":"f073","name":"牛丼","category":"日料","tags":["sweet","salty","meat","rice","fast"],"taste":"甜咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":9},
+  {"id":"f074","name":"日式定食","category":"日料","tags":["light","rice","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":2,"emoji":"🍱","weight":7},
+  {"id":"f075","name":"章鱼小丸子","category":"日料","tags":["salty","seafood","fried","fast"],"taste":"咸","scene":"随便吃","mealTime":"下午茶","priceLevel":1,"emoji":"🐙","weight":7},
+  {"id":"f076","name":"韩式烤肉","category":"韩餐","tags":["salty","meat","bbq"],"taste":"咸","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🥩","weight":8},
+  {"id":"f077","name":"石锅拌饭","category":"韩餐","tags":["spicy","rice","veggie"],"taste":"辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":8},
+  {"id":"f078","name":"韩式炸鸡","category":"韩餐","tags":["sweet","spicy","meat","fried"],"taste":"甜辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":1,"emoji":"🍗","weight":8},
+  {"id":"f079","name":"部队锅","category":"韩餐","tags":["spicy","meat","soup","heavy"],"taste":"辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🥘","weight":7},
+  {"id":"f080","name":"泡菜汤","category":"韩餐","tags":["spicy","sour","soup","rice"],"taste":"酸辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥣","weight":8},
+  {"id":"f081","name":"韩式拌面","category":"韩餐","tags":["spicy","sweet","noodle","cold"],"taste":"甜辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍝","weight":7},
+  {"id":"f082","name":"紫菜包饭","category":"韩餐","tags":["light","rice","fast"],"taste":"清淡","scene":"省钱模式","mealTime":"午餐","priceLevel":1,"emoji":"🍙","weight":9},
+  {"id":"f083","name":"参鸡汤","category":"韩餐","tags":["light","meat","soup","healthy","comfort"],"taste":"清淡","scene":"很累模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐔","weight":7},
+  {"id":"f084","name":"三明治","category":"简餐","tags":["light","fast","cheap"],"taste":"清淡","scene":"省钱模式","mealTime":"早餐","priceLevel":1,"emoji":"🥪","weight":8},
+  {"id":"f085","name":"沙拉","category":"简餐","tags":["light","veggie","healthy","cold"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":1,"emoji":"🥗","weight":7},
+  {"id":"f086","name":"轻食碗","category":"简餐","tags":["light","veggie","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":2,"emoji":"🥣","weight":7},
+  {"id":"f087","name":"意式披萨","category":"简餐","tags":["salty","meat","fried"],"taste":"咸","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🍕","weight":7},
+  {"id":"f088","name":"牛油果吐司","category":"简餐","tags":["light","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"早餐","priceLevel":2,"emoji":"🥑","weight":6},
+  {"id":"f089","name":"燕麦碗","category":"简餐","tags":["sweet","healthy","fast"],"taste":"甜","scene":"健康模式","mealTime":"早餐","priceLevel":1,"emoji":"🥣","weight":7},
+  {"id":"f090","name":"面包","category":"简餐","tags":["sweet","fast","cheap"],"taste":"甜","scene":"省钱模式","mealTime":"早餐","priceLevel":1,"emoji":"🍞","weight":8},
+  {"id":"f091","name":"酸奶碗","category":"简餐","tags":["sweet","healthy","fast"],"taste":"甜","scene":"健康模式","mealTime":"早餐","priceLevel":1,"emoji":"🥛","weight":7},
+  {"id":"f092","name":"鸡蛋仔","category":"简餐","tags":["sweet","fast"],"taste":"甜","scene":"随便吃","mealTime":"下午茶","priceLevel":1,"emoji":"🧇","weight":7},
+  {"id":"f093","name":"可丽饼","category":"简餐","tags":["sweet","fast"],"taste":"甜","scene":"随便吃","mealTime":"下午茶","priceLevel":1,"emoji":"🥞","weight":6},
+  {"id":"f094","name":"越南河粉","category":"简餐","tags":["sour","light","noodle","soup","healthy"],"taste":"清淡","scene":"健康模式","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":8},
+  {"id":"f095","name":"海南鸡饭","category":"简餐","tags":["light","meat","rice"],"taste":"清淡","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🐔","weight":8},
+  {"id":"f096","name":"咖喱饭","category":"简餐","tags":["spicy","rice","comfort"],"taste":"辣","scene":"很累模式","mealTime":"午餐","priceLevel":1,"emoji":"🍛","weight":8},
+  {"id":"f097","name":"卤肉饭","category":"简餐","tags":["salty","meat","rice","comfort"],"taste":"咸","scene":"很累模式","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":9},
+  {"id":"f098","name":"叉烧饭","category":"简餐","tags":["sweet","salty","meat","rice"],"taste":"甜咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":8},
+  {"id":"f099","name":"烧鹅饭","category":"简餐","tags":["salty","meat","rice"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":2,"emoji":"🍚","weight":7},
+  {"id":"f100","name":"云吞面","category":"简餐","tags":["salty","meat","noodle","soup","comfort"],"taste":"咸","scene":"很累模式","mealTime":"午餐","priceLevel":1,"emoji":"🍜","weight":9},
+  {"id":"f101","name":"夫妻肺片","category":"中餐","tags":["spicy","numb","meat","cold","heavy"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":1,"emoji":"🥩","weight":7},
+  {"id":"f102","name":"口水鸡","category":"中餐","tags":["spicy","numb","meat","cold"],"taste":"麻辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🐔","weight":7},
+  {"id":"f103","name":"酸辣土豆丝","category":"中餐","tags":["sour","spicy","veggie","rice"],"taste":"酸辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥔","weight":8},
+  {"id":"f104","name":"干煸四季豆","category":"中餐","tags":["spicy","veggie","rice"],"taste":"辣","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🫘","weight":7},
+  {"id":"f105","name":"蒜泥白肉","category":"中餐","tags":["meat","cold"],"taste":"咸","scene":"随便吃","mealTime":"午餐","priceLevel":1,"emoji":"🥓","weight":7},
+  {"id":"f106","name":"毛血旺","category":"中餐","tags":["spicy","numb","meat","heavy","soup"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🥘","weight":7},
+  {"id":"f107","name":"大盘鸡","category":"中餐","tags":["spicy","meat","rice","noodle"],"taste":"辣","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐔","weight":7},
+  {"id":"f108","name":"烤鱼","category":"中餐","tags":["spicy","seafood","bbq"],"taste":"辣","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":8},
+  {"id":"f109","name":"酸汤肥牛","category":"中餐","tags":["sour","spicy","meat","soup","rice"],"taste":"酸辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🐂","weight":8},
+  {"id":"f110","name":"麻辣香锅","category":"中餐","tags":["spicy","numb","meat","heavy"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🥘","weight":8}
+];
+
+// ====== 提示语 ======
+var TIPS_DATA = {
+  modes: {
+    gentle: [
+      "慢慢想，不急～",
+      "今天的你值得一顿好饭",
+      "随便选一个都是缘分",
+      "肚子说它饿了，快做决定吧",
+      "你喜欢的，就是正确答案",
+      "不如让命运帮你抛个硬币"
+    ],
+    funny: [
+      "你上辈子一定是选择题做太少了",
+      "再纠结下去，外卖都要关门了",
+      "点兵点将，点到谁就是谁",
+      "你的胃已经发出了最后通牒",
+      "吃饭不积极，思想有问题",
+      "当代三大难题：早上吃啥，中午吃啥，晚上吃啥"
+    ],
+    mean: [
+      "这都选不出来？今天的碳水给你降权",
+      "你纠结的时间够炒三个菜了",
+      "选择困难症晚期，建议直接吃土",
+      "我不理解，但我大受震撼",
+      "快！选！别！磨！叽！",
+      "难道你的人生选择也这么纠结？"
+    ]
+  },
+  resultTips: {
+    gentle: ["这个不错，今天试试吧～", "嗯，是个好选择！", "天意如此，就它了", "听起来就很棒，对吧？"],
+    funny: ["就是它了！不满意别找我", "命运的选择，不好吃也要吃完", "恭喜你，抽中了今日限定"],
+    mean: ["就这个，别bb了", "决定了，吃吧，下一个", "这个不行的话，那你还是饿着吧"]
+  }
+};
+
+// ====== 标签 ======
+var TAGS_DATA = [
+  {"id":"spicy","name":"辣","emoji":"🌶️"},{"id":"light","name":"清淡","emoji":"🥬"},
+  {"id":"sweet","name":"甜","emoji":"🍯"},{"id":"salty","name":"咸","emoji":"🧂"},
+  {"id":"sour","name":"酸","emoji":"🍋"},{"id":"numb","name":"麻","emoji":"🥴"},
+  {"id":"heavy","name":"重口","emoji":"😈"},{"id":"soup","name":"有汤","emoji":"🍜"},
+  {"id":"rice","name":"下饭","emoji":"🍚"},{"id":"noodle","name":"面条","emoji":"🍝"},
+  {"id":"meat","name":"肉","emoji":"🥩"},{"id":"seafood","name":"海鲜","emoji":"🦐"},
+  {"id":"veggie","name":"素食","emoji":"🥦"},{"id":"fried","name":"油炸","emoji":"🍟"},
+  {"id":"cold","name":"凉拌","emoji":"🥗"},{"id":"hotpot","name":"火锅","emoji":"🫕"},
+  {"id":"bbq","name":"烧烤","emoji":"🍖"},{"id":"fast","name":"快速","emoji":"⚡"},
+  {"id":"cheap","name":"便宜","emoji":"💰"},{"id":"expensive","name":"贵","emoji":"💎"},
+  {"id":"healthy","name":"健康","emoji":"💪"},{"id":"comfort","name":"治愈","emoji":"😌"}
+];
+
+'use strict';
+
+// Storage module - handles IndexedDB operations
+const Storage = (() => {
+  const DB_NAME = 'what-to-eat';
+  const DB_VERSION = 2;
+
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('foods')) {
+          db.createObjectStore('foods', { keyPath: 'id' });
+        }
+        if (!db.objectStoreNames.contains('history')) {
+          const hs = db.createObjectStore('history', { keyPath: 'id', autoIncrement: true });
+          hs.createIndex('foodId', 'foodId', { unique: false });
+          hs.createIndex('timestamp', 'timestamp', { unique: false });
+        }
+        if (!db.objectStoreNames.contains('preferences')) {
+          db.createObjectStore('preferences', { keyPath: 'key' });
+        }
+        if (!db.objectStoreNames.contains('tags')) {
+          db.createObjectStore('tags', { keyPath: 'id' });
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function getAll(storeName) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readonly');
+      const req = tx.objectStore(storeName).getAll();
+      req.onsuccess = () => resolve(req.result || []);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function put(storeName, data) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readwrite');
+      const req = tx.objectStore(storeName).put(data);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function bulkPut(storeName, items) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      items.forEach(item => store.put(item));
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function remove(storeName, key) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readwrite');
+      tx.objectStore(storeName).delete(key);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function getFoods() {
+    let foods = await getAll('foods');
+    if (foods.length === 0) {
+      // First run - seed from inline data
+      foods = JSON.parse(JSON.stringify(FOODS_DATA));
+      await bulkPut('foods', foods);
+    }
+    return foods;
+  }
+
+  async function getTags() {
+    let tags = await getAll('tags');
+    if (tags.length === 0) {
+      tags = JSON.parse(JSON.stringify(TAGS_DATA));
+      await bulkPut('tags', tags);
+    }
+    return tags;
+  }
+
+  async function saveFood(food) {
+    await put('foods', food);
+  }
+
+  async function deleteFood(id) {
+    await remove('foods', id);
+  }
+
+  async function addHistory(foodId, scene) {
+    const entry = {
+      foodId,
+      scene: scene || '随便吃',
+      timestamp: Date.now()
+    };
+    await put('history', entry);
+  }
+
+  async function getHistory(limit = 50) {
+    const all = await getAll('history');
+    all.sort((a, b) => b.timestamp - a.timestamp);
+    return all.slice(0, limit);
+  }
+
+  async function clearHistory() {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('history', 'readwrite');
+      tx.objectStore('history').clear();
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function getPreferences() {
+    const all = await getAll('preferences');
+    const obj = {};
+    all.forEach(p => { obj[p.key] = p.value; });
+    return obj;
+  }
+
+  async function savePreference(key, value) {
+    await put('preferences', { key, value });
+  }
+
+  async function savePreferences(prefs) {
+    for (const [key, value] of Object.entries(prefs)) {
+      await savePreference(key, value);
+    }
+  }
+
+  async function exportData() {
+    const foods = await getAll('foods');
+    const history = await getAll('history');
+    const preferences = await getPreferences();
+    return JSON.stringify({ foods, history, preferences, exportedAt: new Date().toISOString() }, null, 2);
+  }
+
+  async function importData(jsonStr) {
+    const data = JSON.parse(jsonStr);
+    if (data.foods) await bulkPut('foods', data.foods);
+    if (data.history) await bulkPut('history', data.history);
+    if (data.preferences) await savePreferences(data.preferences);
+  }
+
+  return {
+    getFoods, getTags, saveFood, deleteFood,
+    addHistory, getHistory, clearHistory,
+    getPreferences, savePreference, savePreferences,
+    exportData, importData
+  };
+})();
+/**
+ * @preserve
+ * @license MIT
+ */
+
+'use strict';
+
+// Recommendation engine
+const Recommender = (() => {
+  const RECENT_PENALTY_DAYS = 3;
+  const RECENT_PENALTY_POINTS = 30;
+  const SCENE_SCORE = 20;
+  const TASTE_SCORE = 15;
+  const MEAL_TIME_SCORE = 10;
+  const PRICE_SCORE = 5;
+
+  function getCurrentMealTime() {
+    const h = new Date().getHours();
+    if (h < 10) return '早餐';
+    if (h < 14) return '午餐';
+    if (h < 17) return '下午茶';
+    return '晚餐';
+  }
+
+  function calculateScores(foods, preferences, scene, history) {
+    const currentMealTime = getCurrentMealTime();
+    const recentFoodIds = new Set();
+    const now = Date.now();
+    const penaltyCutoff = now - RECENT_PENALTY_DAYS * 24 * 60 * 60 * 1000;
+
+    history.forEach(h => {
+      if (h.timestamp > penaltyCutoff) {
+        recentFoodIds.add(h.foodId);
+      }
+    });
+
+    const userTaste = preferences.taste || [];
+    if (typeof userTaste === 'string') {
+      // Handle legacy single string
+    }
+
+    return foods.map(food => {
+      let score = food.weight * 2;
+
+      // Scene matching
+      if (food.scene === scene) {
+        score += SCENE_SCORE;
+      }
+
+      // Taste matching
+      if (userTaste && userTaste.length > 0 && food.tags) {
+        const tasteTags = Array.isArray(userTaste) ? userTaste : [userTaste];
+        const matchCount = tasteTags.filter(t => food.tags.includes(t)).length;
+        score += matchCount * (TASTE_SCORE / 3);
+      }
+
+      // Meal time matching
+      if (food.mealTime === currentMealTime) {
+        score += MEAL_TIME_SCORE;
+      }
+
+      // Price level matching (prefer cheaper in 省钱模式, neutral otherwise)
+      if (scene === '省钱模式') {
+        score += (3 - food.priceLevel) * PRICE_SCORE;
+      } else if (scene === '健康模式') {
+        if (food.tags.includes('healthy')) score += PRICE_SCORE * 2;
+        if (food.tags.includes('fried')) score -= PRICE_SCORE;
+      } else if (scene === '想吃爽一点') {
+        if (food.tags.includes('heavy') || food.tags.includes('meat') || food.tags.includes('fried')) {
+          score += PRICE_SCORE;
+        }
+      } else if (scene === '很累模式') {
+        if (food.tags.includes('comfort') || food.tags.includes('fast')) {
+          score += PRICE_SCORE * 2;
+        }
+      } else if (scene === '聚餐模式') {
+        if (food.priceLevel >= 2) score += PRICE_SCORE;
+      }
+
+      // Recent penalty
+      if (recentFoodIds.has(food.id)) {
+        score -= RECENT_PENALTY_POINTS;
+      }
+
+      // Add small randomness
+      score += Math.random() * 5;
+
+      food._score = Math.max(0, score);
+      return food;
+    });
+  }
+
+  function recommend(foods, preferences, scene, history) {
+    const scored = calculateScores(foods, preferences, scene, history);
+    scored.sort((a, b) => b._score - a._score);
+
+    // Pick from top 30% randomly
+    const topCount = Math.max(3, Math.ceil(scored.length * 0.3));
+    const candidates = scored.slice(0, topCount);
+    const pick = candidates[Math.floor(Math.random() * candidates.length)];
+
+    return pick;
+  }
+
+  function recommendNext(foods, preferences, scene, history, excludeId) {
+    const filtered = foods.filter(f => f.id !== excludeId);
+    return recommend(filtered, preferences, scene, history);
+  }
+
+  return { recommend, recommendNext, calculateScores };
+})();
+/**
+ * @preserve
+ * @license MIT
+ */
+
+'use strict';
+
+// Main application module
+const App = (() => {
+  // State
+  let foods = [];
+  let tags = [];
+  let preferences = {};
+  let history = [];
+  let currentFood = null;
+  function getCurrentScene() {
+    const active = document.querySelector('.scene-chip.active');
+    return active ? active.dataset.scene : '随便吃';
+  }
+  let tips = null;
+  let tipMode = 'gentle';
+
+  // DOM refs
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => document.querySelectorAll(s);
+
+  // ==================== Init ====================
+  async function init() {
+    loadTips();
+    foods = await Storage.getFoods();
+    tags = await Storage.getTags();
+    preferences = await Storage.getPreferences();
+    history = await Storage.getHistory(100);
+
+    if (preferences.tipMode) tipMode = preferences.tipMode;
+
+    // Check preferences setup
+    const prefComplete = preferences.tastes && preferences.tastes.length > 0;
+    if (!prefComplete) {
+      showPage('onboarding');
+      renderOnboarding();
+    } else {
+      showPage('home');
+    }
+
+    setupEventListeners();
+    renderHomeStats();
+  }
+
+  function loadTips() {
+    tips = TIPS_DATA;
+  }
+
+  function getRandomTip() {
+    const arr = tips?.modes?.[tipMode] || tips?.modes?.gentle || ['想想今天吃什么...'];
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function getResultTip() {
+    const arr = tips?.resultTips?.[tipMode] || ['就它了！'];
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  // ==================== Page Routing ====================
+  function showPage(name) {
+    $$('.page').forEach(p => p.classList.remove('active'));
+    const page = $(`#page-${name}`);
+    if (page) page.classList.add('active');
+    // Update nav
+    $$('.tab-item').forEach(t => t.classList.remove('active'));
+    const tab = $(`.tab-item[data-page="${name}"]`);
+    if (tab) tab.classList.add('active');
+  }
+
+  // ==================== Event Listeners ====================
+  function setupEventListeners() {
+    // Tab navigation
+    $$('.tab-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const page = el.dataset.page;
+        if (page === 'home') showPage('home');
+        else if (page === 'manage') { renderManage(); showPage('manage'); }
+        else if (page === 'settings') { renderSettings(); showPage('settings'); }
+        else if (page === 'history') { renderHistory(); showPage('history'); }
+      });
+    });
+
+    // Decide button
+    document.getElementById('btn-decide').addEventListener('click', handleDecide);
+
+    // Accept / Retry
+    document.getElementById('btn-accept').addEventListener('click', handleAccept);
+    document.getElementById('btn-retry').addEventListener('click', handleRetry);
+
+    // Scene selector
+    document.getElementById('scene-selector').addEventListener('click', (e) => {
+      const chip = e.target.closest('.scene-chip');
+      if (!chip) return;
+      document.querySelectorAll('.scene-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+
+    // Onboarding
+    document.getElementById('btn-onboarding-done').addEventListener('click', handleOnboardingDone);
+
+    // Settings: save preferences
+    document.getElementById('btn-save-prefs').addEventListener('click', handleSavePrefs);
+    document.getElementById('btn-clear-history').addEventListener('click', handleClearHistory);
+    document.getElementById('btn-export-data').addEventListener('click', handleExport);
+    document.getElementById('btn-import-data').addEventListener('click', () => document.getElementById('import-file').click());
+    document.getElementById('import-file').addEventListener('change', handleImport);
+    document.getElementById('btn-reset-data').addEventListener('click', handleReset);
+
+    // Tip mode selector
+    $$('input[name="tipMode"]').forEach(el => {
+      el.addEventListener('change', async (e) => {
+        tipMode = e.target.value;
+        await Storage.savePreference('tipMode', tipMode);
+      });
+    });
+
+    // Manage page
+    document.getElementById('btn-add-food').addEventListener('click', showAddFoodModal);
+    document.getElementById('btn-batch-tags').addEventListener('click', showBatchTagModal);
+    document.getElementById('manage-search').addEventListener('input', () => renderManageList());
+    document.getElementById('manage-category-filter').addEventListener('change', () => renderManageList());
+
+    // Modal close
+    document.getElementById('modal-overlay').addEventListener('click', closeModal);
+    document.getElementById('btn-modal-close').addEventListener('click', closeModal);
+    document.getElementById('btn-modal-cancel').addEventListener('click', closeModal);
+    document.getElementById('btn-modal-save').addEventListener('click', handleModalSave);
+
+    // Batch tag modal
+    document.getElementById('btn-batch-cancel').addEventListener('click', closeBatchModal);
+    document.getElementById('btn-batch-save').addEventListener('click', handleBatchSave);
+
+    // Dark mode toggle
+    const darkToggle = document.getElementById('dark-mode-toggle');
+    if (preferences.darkMode === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      darkToggle.checked = true;
+    }
+    darkToggle.addEventListener('change', async (e) => {
+      const theme = e.target.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      await Storage.savePreference('darkMode', theme);
+    });
+
+    // Manage: export / import single
+    document.getElementById('btn-manage-export').addEventListener('click', handleManageExport);
+  }
+
+  // ==================== Home ====================
+  function renderHomeStats() {
+    const count = foods.length;
+    const recentCount = history.filter(h => {
+      const d = new Date();
+      d.setDate(d.getDate() - 7);
+      return h.timestamp > d.getTime();
+    }).length;
+    document.getElementById('home-stats').textContent = `${count} 种餐品 · 本周已吃 ${recentCount} 次`;
+  }
+
+  // ==================== Recommendation ====================
+  function handleDecide() {
+    const btn = document.getElementById('btn-decide');
+    btn.disabled = true;
+    btn.textContent = '🤔 正在思考...';
+    btn.classList.add('thinking');
+
+    // Show recommendation view
+    document.getElementById('home-content').style.display = 'none';
+    document.getElementById('recommend-view').style.display = 'block';
+
+    // Animate
+    animateRecommend(() => {
+      const result = Recommender.recommend(foods, preferences, getCurrentScene(), history);
+      currentFood = result;
+      showRecommendResult(result);
+      btn.disabled = false;
+      btn.textContent = '🎲 帮我决定';
+      btn.classList.remove('thinking');
+    });
+  }
+
+  function animateRecommend(callback) {
+    const container = document.getElementById('recommend-animation');
+    const resultArea = document.getElementById('recommend-result');
+    resultArea.style.display = 'none';
+    container.style.display = 'flex';
+    container.innerHTML = '';
+
+    // Slot machine animation
+    let count = 0;
+    const totalFrames = 20;
+    const interval = setInterval(() => {
+      const randomFood = foods[Math.floor(Math.random() * foods.length)];
+      container.innerHTML = `
+        <div class="slot-item">
+          <span class="slot-emoji">${randomFood.emoji}</span>
+          <span class="slot-name">${randomFood.name}</span>
+        </div>
+      `;
+      count++;
+      if (count >= totalFrames) {
+        clearInterval(interval);
+        container.style.display = 'none';
+        resultArea.style.display = 'block';
+        if (callback) callback();
+      }
+    }, 80);
+  }
+
+  function showRecommendResult(food) {
+    const resultArea = document.getElementById('recommend-result');
+    // Entrance animation
+    resultArea.classList.remove('result-enter');
+    void resultArea.offsetWidth;
+    resultArea.classList.add('result-enter');
+
+    document.getElementById('result-tip').textContent = getResultTip();
+    document.getElementById('result-emoji').textContent = food.emoji;
+    document.getElementById('result-name').textContent = food.name;
+    document.getElementById('result-category').textContent = food.category;
+    document.getElementById('result-taste').textContent = food.taste;
+
+    // Tags
+    const tagContainer = document.getElementById('result-tags');
+    tagContainer.innerHTML = '';
+    if (food.tags) {
+      food.tags.slice(0, 4).forEach(tagId => {
+        const tagObj = tags.find(t => t.id === tagId);
+        if (tagObj) {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = tagObj.emoji + ' ' + tagObj.name;
+          tagContainer.appendChild(span);
+        }
+      });
+    }
+
+    document.getElementById('result-scene').textContent = getCurrentScene();
+  }
+
+  function handleAccept() {
+    if (currentFood) {
+      Storage.addHistory(currentFood.id, getCurrentScene());
+      history.push({ foodId: currentFood.id, scene: getCurrentScene(), timestamp: Date.now() });
+    }
+    // Back to home
+    document.getElementById('home-content').style.display = 'block';
+    document.getElementById('recommend-view').style.display = 'none';
+    renderHomeStats();
+  }
+
+  function handleRetry() {
+    if (!currentFood) return;
+    const newResult = Recommender.recommendNext(foods, preferences, getCurrentScene(), history, currentFood.id);
+    currentFood = newResult;
+    showRecommendResult(newResult);
+  }
+
+  // ==================== Onboarding ====================
+  function renderOnboarding() {
+    const container = document.getElementById('onboarding-tastes');
+    const tasteOptions = [
+      { id: 'spicy', label: '🌶️ 辣', emoji: '🌶️' },
+      { id: 'light', label: '🥬 清淡', emoji: '🥬' },
+      { id: 'sweet', label: '🍯 甜', emoji: '🍯' },
+      { id: 'salty', label: '🧂 咸', emoji: '🧂' },
+      { id: 'sour', label: '🍋 酸', emoji: '🍋' },
+      { id: 'numb', label: '🥴 麻', emoji: '🥴' },
+      { id: 'heavy', label: '😈 重口', emoji: '😈' }
+    ];
+
+    container.innerHTML = '';
+    tasteOptions.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'taste-btn';
+      btn.dataset.tasteId = t.id;
+      btn.textContent = t.label;
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+      });
+      container.appendChild(btn);
+    });
+  }
+
+  async function handleOnboardingDone() {
+    const selected = document.querySelectorAll('#onboarding-tastes .taste-btn.selected');
+    if (selected.length === 0) {
+      showToast('至少选一个口味偏好哦～');
+      return;
+    }
+    const tastes = Array.from(selected).map(el => el.dataset.tasteId);
+    // Store scene preference
+    const scene = document.getElementById('onboarding-scene').value;
+    await Storage.savePreferences({
+      tastes: tastes,
+      defaultScene: scene,
+      completed: true
+    });
+    preferences = await Storage.getPreferences();
+    showPage('home');
+  }
+
+  // ==================== Manage ====================
+  let manageSelectedFoods = new Set();
+
+  function renderManage() {
+    manageSelectedFoods = new Set();
+    renderManageFilters();
+    renderManageList();
+  }
+
+  function renderManageFilters() {
+    const select = document.getElementById('manage-category-filter');
+    const currentVal = select.value;
+    const categories = [...new Set(foods.map(f => f.category))].sort();
+    select.innerHTML = '<option value="all">全部分类</option>';
+    categories.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c;
+      select.appendChild(opt);
+    });
+    select.value = currentVal;
+  }
+
+  function getFilteredFoods() {
+    const query = document.getElementById('manage-search').value.toLowerCase();
+    const cat = document.getElementById('manage-category-filter').value;
+    return foods.filter(f => {
+      if (cat !== 'all' && f.category !== cat) return false;
+      if (query && !f.name.includes(query) && !f.tags?.some(t => t.includes(query))) return false;
+      return true;
+    });
+  }
+
+  function renderManageList() {
+    const container = document.getElementById('manage-list');
+    const filtered = getFilteredFoods();
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="empty-state">没有找到匹配的餐品</div>';
+      return;
+    }
+
+    container.innerHTML = '';
+    filtered.forEach(f => {
+      const card = document.createElement('div');
+      card.className = 'manage-card';
+      if (manageSelectedFoods.has(f.id)) card.classList.add('selected');
+
+      const tagSpans = (f.tags || []).slice(0, 3).map(t => {
+        const tagObj = tags.find(tg => tg.id === t);
+        return tagObj ? `<span class="mini-tag">${tagObj.emoji}</span>` : '';
+      }).join('');
+
+      card.innerHTML = `
+        <div class="manage-card-left">
+          <span class="manage-card-emoji">${f.emoji}</span>
+          <div class="manage-card-info">
+            <span class="manage-card-name">${f.name}</span>
+            <span class="manage-card-meta">${f.category} · ${f.taste} · ¥${'💰'.repeat(f.priceLevel)}</span>
+            <span class="manage-card-tags">${tagSpans}</span>
+          </div>
+        </div>
+        <div class="manage-card-actions">
+          <button class="btn-icon" data-edit="${f.id}" title="编辑">✏️</button>
+          <button class="btn-icon" data-del="${f.id}" title="删除">🗑️</button>
+        </div>
+      `;
+
+      // Multi-select
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.manage-card-actions')) return;
+        card.classList.toggle('selected');
+        if (manageSelectedFoods.has(f.id)) manageSelectedFoods.delete(f.id);
+        else manageSelectedFoods.add(f.id);
+        document.getElementById('manage-selected-count').textContent = manageSelectedFoods.size;
+      });
+
+      // Edit
+      card.querySelector('[data-edit]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        showEditFoodModal(f);
+      });
+
+      // Delete
+      card.querySelector('[data-del]').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (confirm(`确定删除「${f.name}」？`)) {
+          await Storage.deleteFood(f.id);
+          foods = foods.filter(x => x.id !== f.id);
+          renderManageList();
+        }
+      });
+
+      container.appendChild(card);
+    });
+
+    document.getElementById('manage-selected-count').textContent = manageSelectedFoods.size;
+  }
+
+  // ==================== Food Modal ====================
+  let editingFood = null;
+
+  function showAddFoodModal() {
+    editingFood = null;
+    document.getElementById('modal-title').textContent = '新增餐品';
+    document.getElementById('food-name').value = '';
+    document.getElementById('food-emoji').value = '';
+    document.getElementById('food-category').value = '中餐';
+    document.getElementById('food-taste').value = '清淡';
+    document.getElementById('food-scene').value = '随便吃';
+    document.getElementById('food-mealtime').value = '午餐';
+    document.getElementById('food-price').value = '1';
+    document.getElementById('food-weight').value = '8';
+    renderTagSelections();
+    openModal();
+  }
+
+  function showEditFoodModal(food) {
+    editingFood = food;
+    document.getElementById('modal-title').textContent = '编辑餐品';
+    document.getElementById('food-name').value = food.name;
+    document.getElementById('food-emoji').value = food.emoji || '';
+    document.getElementById('food-category').value = food.category;
+    document.getElementById('food-taste').value = food.taste;
+    document.getElementById('food-scene').value = food.scene;
+    document.getElementById('food-mealtime').value = food.mealTime;
+    document.getElementById('food-price').value = food.priceLevel;
+    document.getElementById('food-weight').value = food.weight;
+    renderTagSelections(food.tags || []);
+    openModal();
+  }
+
+  function renderTagSelections(selectedTags = []) {
+    const container = document.getElementById('food-tags');
+    container.innerHTML = '';
+    tags.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'taste-btn small';
+      if (selectedTags.includes(t.id)) btn.classList.add('selected');
+      btn.dataset.tagId = t.id;
+      btn.textContent = t.emoji + ' ' + t.name;
+      btn.addEventListener('click', () => btn.classList.toggle('selected'));
+      container.appendChild(btn);
+    });
+  }
+
+  function openModal() {
+    document.getElementById('modal-overlay').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+  }
+
+  async function handleModalSave() {
+    const name = document.getElementById('food-name').value.trim();
+    if (!name) { showToast('请输入餐品名称'); return; }
+
+    const selectedTags = Array.from(document.querySelectorAll('#food-tags .taste-btn.selected')).map(el => el.dataset.tagId);
+    const foodData = {
+      name: name,
+      emoji: document.getElementById('food-emoji').value || '🍽️',
+      category: document.getElementById('food-category').value,
+      taste: document.getElementById('food-taste').value,
+      scene: document.getElementById('food-scene').value,
+      mealTime: document.getElementById('food-mealtime').value,
+      priceLevel: parseInt(document.getElementById('food-price').value),
+      weight: parseInt(document.getElementById('food-weight').value),
+      tags: selectedTags
+    };
+
+    if (editingFood) {
+      foodData.id = editingFood.id;
+      Object.assign(editingFood, foodData);
+      await Storage.saveFood(editingFood);
+      // Update in-memory array
+      const idx = foods.findIndex(f => f.id === editingFood.id);
+      if (idx >= 0) foods[idx] = editingFood;
+      showToast('已更新');
+    } else {
+      foodData.id = 'f' + Date.now().toString(36);
+      await Storage.saveFood(foodData);
+      foods.push(foodData);
+      showToast('已添加');
+    }
+
+    closeModal();
+    renderManageList();
+    renderHomeStats();
+  }
+
+  // ==================== Batch Tag ====================
+  function showBatchTagModal() {
+    if (manageSelectedFoods.size === 0) {
+      showToast('请先选择要修改的餐品');
+      return;
+    }
+    document.getElementById('batch-modal-overlay').classList.add('active');
+    renderBatchTagOptions();
+  }
+
+  function closeBatchModal() {
+    document.getElementById('batch-modal-overlay').classList.remove('active');
+  }
+
+  function renderBatchTagOptions() {
+    const container = document.getElementById('batch-tag-list');
+    container.innerHTML = '';
+    tags.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'taste-btn small';
+      btn.dataset.tagId = t.id;
+      btn.textContent = t.emoji + ' ' + t.name;
+      btn.addEventListener('click', () => btn.classList.toggle('selected'));
+      container.appendChild(btn);
+    });
+  }
+
+  async function handleBatchSave() {
+    const addTags = Array.from(document.querySelectorAll('#batch-tag-list .taste-btn.selected')).map(el => el.dataset.tagId);
+    const action = document.getElementById('batch-action').value;
+
+    for (const foodId of manageSelectedFoods) {
+      const food = foods.find(f => f.id === foodId);
+      if (!food) continue;
+      if (!food.tags) food.tags = [];
+
+      if (action === 'add') {
+        addTags.forEach(t => { if (!food.tags.includes(t)) food.tags.push(t); });
+      } else if (action === 'remove') {
+        food.tags = food.tags.filter(t => !addTags.includes(t));
+      } else if (action === 'replace') {
+        food.tags = [...addTags];
+      }
+
+      await Storage.saveFood(food);
+    }
+
+    closeBatchModal();
+    renderManageList();
+    manageSelectedFoods = new Set();
+    document.getElementById('manage-selected-count').textContent = '0';
+    showToast(`已批量修改 ${manageSelectedFoods.size} 个餐品`);
+  }
+
+  // ==================== History ====================
+  async function renderHistory() {
+    history = await Storage.getHistory(200);
+    const container = document.getElementById('history-list');
+
+    if (history.length === 0) {
+      container.innerHTML = '<div class="empty-state">还没有饮食记录，快去吃点东西吧！</div>';
+      return;
+    }
+
+    // Group by date
+    const groups = {};
+    history.forEach(h => {
+      const date = new Date(h.timestamp);
+      const key = date.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'short' });
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(h);
+    });
+
+    container.innerHTML = '';
+    Object.entries(groups).forEach(([date, items]) => {
+      const section = document.createElement('div');
+      section.className = 'history-section';
+
+      let itemsHtml = '';
+      items.forEach(h => {
+        const food = foods.find(f => f.id === h.foodId);
+        const time = new Date(h.timestamp).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        itemsHtml += `
+          <div class="history-item">
+            <span class="history-emoji">${food?.emoji || '🍽️'}</span>
+            <div class="history-info">
+              <span class="history-name">${food?.name || '未知餐品'}</span>
+              <span class="history-meta">${h.scene || '随便吃'} · ${time}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      section.innerHTML = `
+        <div class="history-date">${date}</div>
+        ${itemsHtml}
+      `;
+      container.appendChild(section);
+    });
+  }
+
+  // ==================== Settings ====================
+  function renderSettings() {
+    document.getElementById('settings-scene').value = preferences.defaultScene || '随便吃';
+
+    // Show current taste prefs
+    const tastes = preferences.tastes || [];
+    const container = document.getElementById('settings-tastes');
+    container.innerHTML = '';
+    const tasteOptions = [
+      { id: 'spicy', label: '🌶️ 辣' },
+      { id: 'light', label: '🥬 清淡' },
+      { id: 'sweet', label: '🍯 甜' },
+      { id: 'salty', label: '🧂 咸' },
+      { id: 'sour', label: '🍋 酸' },
+      { id: 'numb', label: '🥴 麻' },
+      { id: 'heavy', label: '😈 重口' }
+    ];
+    tasteOptions.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'taste-btn';
+      if (tastes.includes(t.id)) btn.classList.add('selected');
+      btn.dataset.tasteId = t.id;
+      btn.textContent = t.label;
+      btn.addEventListener('click', () => btn.classList.toggle('selected'));
+      container.appendChild(btn);
+    });
+
+    // Tip mode
+    if (preferences.tipMode) {
+      const radio = document.querySelector(`input[name="tipMode"][value="${preferences.tipMode}"]`);
+      if (radio) radio.checked = true;
+    }
+  }
+
+  async function handleSavePrefs() {
+    const tastes = Array.from(document.querySelectorAll('#settings-tastes .taste-btn.selected')).map(el => el.dataset.tasteId);
+    if (tastes.length === 0) { showToast('至少选一个口味'); return; }
+    const scene = document.getElementById('settings-scene').value;
+    await Storage.savePreferences({ tastes, defaultScene: scene });
+    preferences = await Storage.getPreferences();
+    showToast('偏好已保存');
+  }
+
+  async function handleClearHistory() {
+    if (confirm('确定清空所有历史记录？')) {
+      await Storage.clearHistory();
+      history = [];
+      showToast('历史已清空');
+      renderHistory();
+    }
+  }
+
+  async function handleExport() {
+    const data = await Storage.exportData();
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `food-data-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('导出成功');
+  }
+
+  function handleImport(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!confirm('导入将合并数据，确定继续？')) return;
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      try {
+        await Storage.importData(ev.target.result);
+        foods = await Storage.getFoods();
+        history = await Storage.getHistory(100);
+        showToast('导入成功');
+        renderManageList();
+        renderHomeStats();
+      } catch (err) {
+        showToast('导入失败：' + err.message);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  }
+
+  function handleManageExport() {
+    const filtered = getFilteredFoods();
+    const data = JSON.stringify(filtered, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `manage-export-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async function handleReset() {
+    if (!confirm('确定重置所有数据？此操作不可撤销！')) return;
+    if (!confirm('再次确认：所有餐品、历史、偏好将被清除！')) return;
+
+    // Delete all IndexedDB stores
+    const db = await new Promise((resolve, reject) => {
+      const req = indexedDB.open('what-to-eat', 2);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+    const stores = ['foods', 'history', 'preferences', 'tags'];
+    for (const store of stores) {
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction(store, 'readwrite');
+        tx.objectStore(store).clear();
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+    db.close();
+    // Reload page
+    window.location.reload();
+  }
+
+  // ==================== Toast ====================
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  // ==================== Start ====================
+  document.addEventListener('DOMContentLoaded', init);
+
+  return {};
+})();
+/**
+ * @preserve
+ * @license MIT
+ */
+
+</script>
+</body>
+</html>
