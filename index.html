@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="吃什么">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#007aff">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23007aff'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='100'%3E🍽️%3C/text%3E%3C/svg%3E">
+<title>一会儿吃什么？</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <div class="header">
+    <h1>🍽️ 一会儿吃什么？</h1>
+    <div class="header-sub" id="home-stats">加载中...</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- ====== Home Page ====== -->
+    <div class="page active" id="page-home">
+      <div id="home-content">
+        <!-- Scene Selector -->
+        <div class="scene-selector" id="scene-selector">
+          <button class="scene-chip active" data-scene="随便吃">🤷 随便吃</button>
+          <button class="scene-chip" data-scene="想吃爽一点">😋 想吃爽</button>
+          <button class="scene-chip" data-scene="健康模式">🥗 健康</button>
+          <button class="scene-chip" data-scene="省钱模式">💰 省钱</button>
+          <button class="scene-chip" data-scene="很累模式">😴 很累</button>
+          <button class="scene-chip" data-scene="聚餐模式">👥 聚餐</button>
+        </div>
+
+        <!-- Decide Button -->
+        <button class="decide-btn" id="btn-decide">🎲 帮我决定</button>
+        <div class="home-stats" id="home-stats-extra"></div>
+
+        <!-- Quick Categories -->
+        <div class="quick-categories">
+          <button class="quick-cat-btn" data-cat="中餐"><span class="cat-emoji">🥟</span><span class="cat-label">中餐</span></button>
+          <button class="quick-cat-btn" data-cat="火锅"><span class="cat-emoji">🫕</span><span class="cat-label">火锅</span></button>
+          <button class="quick-cat-btn" data-cat="快餐"><span class="cat-emoji">🍔</span><span class="cat-label">快餐</span></button>
+          <button class="quick-cat-btn" data-cat="面食"><span class="cat-emoji">🍜</span><span class="cat-label">面食</span></button>
+          <button class="quick-cat-btn" data-cat="日料"><span class="cat-emoji">🍣</span><span class="cat-label">日料</span></button>
+          <button class="quick-cat-btn" data-cat="韩餐"><span class="cat-emoji">🥩</span><span class="cat-label">韩餐</span></button>
+          <button class="quick-cat-btn" data-cat="简餐"><span class="cat-emoji">🥗</span><span class="cat-label">简餐</span></button>
+        </div>
+      </div>
+
+      <!-- Recommend View (hidden by default) -->
+      <div id="recommend-view">
+        <div id="recommend-animation">
+          <div class="slot-item">
+            <span class="slot-emoji">🤔</span>
+            <span class="slot-name">思考中...</span>
+          </div>
+        </div>
+        <div id="recommend-result" style="display:none">
+          <div class="recommend-card">
+            <div class="result-tip" id="result-tip"></div>
+            <span class="result-emoji" id="result-emoji">🍽️</span>
+            <div class="result-name" id="result-name">加载中</div>
+            <div class="result-meta">
+              <span id="result-category">分类</span>
+              <span id="result-taste">口味</span>
+            </div>
+            <div class="result-tags" id="result-tags"></div>
+            <div class="result-scene" id="result-scene"></div>
+          </div>
+          <div class="recommend-actions">
+            <button class="btn-accept" id="btn-accept">✅ 就吃这个</button>
+            <button class="btn-retry" id="btn-retry">🔄 换一个</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== Onboarding Page ====== -->
+    <div class="page" id="page-onboarding">
+      <div class="onboarding-card">
+        <div class="onboarding-title">👋 你好！</div>
+        <div class="onboarding-sub">先告诉我你的口味偏好，开始我们的美食之旅～</div>
+        <div class="settings-label" style="margin-bottom:8px;text-transform:none">你喜欢的口味（可多选）</div>
+        <div class="taste-grid" id="onboarding-tastes"></div>
+        <div class="settings-label" style="margin-bottom:8px;text-transform:none;margin-top:8px">默认场景</div>
+        <select class="onboarding-select" id="onboarding-scene">
+          <option value="随便吃">🤷 随便吃</option>
+          <option value="想吃爽一点">😋 想吃爽一点</option>
+          <option value="健康模式">🥗 健康模式</option>
+          <option value="省钱模式">💰 省钱模式</option>
+          <option value="很累模式">😴 很累模式</option>
+          <option value="聚餐模式">👥 聚餐模式</option>
+        </select>
+        <button class="btn-primary" id="btn-onboarding-done">开始使用 🚀</button>
+      </div>
+    </div>
+
+    <!-- ====== Manage Page ====== -->
+    <div class="page" id="page-manage">
+      <div class="manage-toolbar">
+        <input type="text" id="manage-search" placeholder="🔍 搜索餐品..." autocomplete="off">
+        <select id="manage-category-filter"><option value="all">全部分类</option></select>
+      </div>
+      <div class="manage-actions">
+        <button class="btn-secondary" id="btn-add-food">➕ 新增</button>
+        <button class="btn-secondary" id="btn-batch-tags">🏷️ 批量标签</button>
+        <button class="btn-secondary" id="btn-manage-export">📤 导出选中</button>
+      </div>
+      <div class="manage-selection-bar">
+        <span>已选 <strong id="manage-selected-count">0</strong> 项</span>
+      </div>
+      <div class="manage-list" id="manage-list"></div>
+    </div>
+
+    <!-- ====== History Page ====== -->
+    <div class="page" id="page-history">
+      <div id="history-list"></div>
+    </div>
+
+    <!-- ====== Settings Page ====== -->
+    <div class="page" id="page-settings">
+      <div class="settings-group">
+        <div class="settings-label">口味偏好</div>
+        <div class="card">
+          <div class="taste-grid" id="settings-tastes"></div>
+          <div style="margin-top:12px">
+            <label class="settings-label" style="text-transform:none;margin-bottom:4px">默认场景</label>
+            <select class="settings-select" id="settings-scene">
+              <option value="随便吃">🤷 随便吃</option>
+              <option value="想吃爽一点">😋 想吃爽一点</option>
+              <option value="健康模式">🥗 健康模式</option>
+              <option value="省钱模式">💰 省钱模式</option>
+              <option value="很累模式">😴 很累模式</option>
+              <option value="聚餐模式">👥 聚餐模式</option>
+            </select>
+          </div>
+          <button class="btn-primary" id="btn-save-prefs" style="margin-top:12px">保存偏好</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">显示</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-label">深色模式</div>
+            <div class="settings-row-desc">切换深色/浅色主题</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">提示语风格</div>
+        <div class="card">
+          <div class="radio-group">
+            <input type="radio" name="tipMode" id="tip-gentle" value="gentle">
+            <label for="tip-gentle">🌸 温柔</label>
+            <input type="radio" name="tipMode" id="tip-funny" value="funny">
+            <label for="tip-funny">😂 搞笑</label>
+            <input type="radio" name="tipMode" id="tip-mean" value="mean">
+            <label for="tip-mean">😈 毒舌</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">数据管理</div>
+        <div class="settings-actions">
+          <button class="btn-secondary" id="btn-clear-history">🗑️ 清空历史记录</button>
+          <button class="btn-secondary" id="btn-export-data">📤 导出全部数据</button>
+          <button class="btn-secondary" id="btn-import-data">📥 导入数据</button>
+          <input type="file" id="import-file" accept=".json" style="display:none">
+          <button class="btn-danger" id="btn-reset-data">⚠️ 重置所有数据</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="tab-item active" data-page="home">
+      <span class="tab-icon">🏠</span>
+      首页
+    </button>
+    <button class="tab-item" data-page="manage">
+      <span class="tab-icon">📋</span>
+      管理
+    </button>
+    <button class="tab-item" data-page="history">
+      <span class="tab-icon">📜</span>
+      历史
+    </button>
+    <button class="tab-item" data-page="settings">
+      <span class="tab-icon">⚙️</span>
+      设置
+    </button>
+  </nav>
+</div>
+
+<!-- Modal: Add/Edit Food -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">新增餐品</div>
+      <button class="modal-close" id="btn-modal-close">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex:3">
+        <label class="form-label">名称</label>
+        <input class="form-input" id="food-name" placeholder="如：宫保鸡丁" autocomplete="off">
+      </div>
+      <div class="form-group" style="flex:1">
+        <label class="form-label">Emoji</label>
+        <input class="form-input" id="food-emoji" placeholder="🍗" autocomplete="off">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">分类</label>
+        <select class="form-input" id="food-category">
+          <option>中餐</option><option>火锅</option><option>快餐</option>
+          <option>面食</option><option>日料</option><option>韩餐</option><option>简餐</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">口味</label>
+        <select class="form-input" id="food-taste">
+          <option>清淡</option><option>辣</option><option>麻辣</option>
+          <option>酸甜</option><option>酸辣</option><option>甜辣</option>
+          <option>咸</option><option>酸</option><option>甜</option><option>甜咸</option><option>清甜</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">场景</label>
+        <select class="form-input" id="food-scene">
+          <option>随便吃</option><option>想吃爽一点</option><option>健康模式</option>
+          <option>省钱模式</option><option>很累模式</option><option>聚餐模式</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">餐时</label>
+        <select class="form-input" id="food-mealtime">
+          <option>早餐</option><option>午餐</option><option>下午茶</option><option>晚餐</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">价格等级</label>
+        <select class="form-input" id="food-price">
+          <option value="1">💰 便宜</option>
+          <option value="2">💰💰 中等</option>
+          <option value="3">💰💰💰 较贵</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">权重 (1-10)</label>
+        <input class="form-input" id="food-weight" type="number" min="1" max="10" value="8">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">标签（可多选）</label>
+      <div class="tag-select" id="food-tags"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" id="btn-modal-cancel">取消</button>
+      <button class="btn-modal-save" id="btn-modal-save">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Batch Tags -->
+<div class="batch-modal-overlay" id="batch-modal-overlay">
+  <div class="batch-content">
+    <div class="modal-header">
+      <div class="modal-title">批量修改标签</div>
+      <button class="modal-close" onclick="document.getElementById('batch-modal-overlay').classList.remove('active')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">操作</label>
+      <select class="form-input" id="batch-action">
+        <option value="add">添加标签</option>
+        <option value="remove">移除标签</option>
+        <option value="replace">替换为选中标签</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">选择标签</label>
+      <div class="tag-select" id="batch-tag-list"></div>
+    </div>
+    <div class="batch-actions">
+      <button class="btn-modal-cancel" id="btn-batch-cancel">取消</button>
+      <button class="btn-modal-save" id="btn-batch-save">应用</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/recommend.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+// Quick category buttons - filter in manage page
+document.querySelectorAll('.quick-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    // Navigate to manage and set filter
+    const select = document.getElementById('manage-category-filter');
+    if (select) { select.value = cat; }
+    // Trigger tab switch
+    const manageTab = document.querySelector('.tab-item[data-page="manage"]');
+    if (manageTab) manageTab.click();
+  });
+});
+</script>
+</body>
+</html>

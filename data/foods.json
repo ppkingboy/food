@@ -1,0 +1,1827 @@
+[
+  {
+    "id": "f001",
+    "name": "宫保鸡丁",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "rice"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍗",
+    "weight": 10
+  },
+  {
+    "id": "f002",
+    "name": "麻婆豆腐",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "numb",
+      "rice"
+    ],
+    "taste": "麻辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🫘",
+    "weight": 9
+  },
+  {
+    "id": "f003",
+    "name": "鱼香肉丝",
+    "category": "中餐",
+    "tags": [
+      "sweet",
+      "sour",
+      "rice"
+    ],
+    "taste": "酸甜",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥓",
+    "weight": 9
+  },
+  {
+    "id": "f004",
+    "name": "水煮鱼",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "numb",
+      "seafood",
+      "rice"
+    ],
+    "taste": "麻辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐟",
+    "weight": 8
+  },
+  {
+    "id": "f005",
+    "name": "回锅肉",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "rice"
+    ],
+    "taste": "辣",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥩",
+    "weight": 9
+  },
+  {
+    "id": "f006",
+    "name": "番茄炒蛋",
+    "category": "中餐",
+    "tags": [
+      "sweet",
+      "light",
+      "rice"
+    ],
+    "taste": "酸甜",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍅",
+    "weight": 10
+  },
+  {
+    "id": "f007",
+    "name": "红烧排骨",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🍖",
+    "weight": 8
+  },
+  {
+    "id": "f008",
+    "name": "糖醋里脊",
+    "category": "中餐",
+    "tags": [
+      "sweet",
+      "sour",
+      "meat",
+      "rice"
+    ],
+    "taste": "酸甜",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🥩",
+    "weight": 8
+  },
+  {
+    "id": "f009",
+    "name": "干锅牛蛙",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "heavy"
+    ],
+    "taste": "辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐸",
+    "weight": 7
+  },
+  {
+    "id": "f010",
+    "name": "清蒸鲈鱼",
+    "category": "中餐",
+    "tags": [
+      "light",
+      "seafood",
+      "rice",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐟",
+    "weight": 8
+  },
+  {
+    "id": "f011",
+    "name": "东坡肉",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice",
+      "heavy"
+    ],
+    "taste": "咸",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🥩",
+    "weight": 7
+  },
+  {
+    "id": "f012",
+    "name": "酸菜鱼",
+    "category": "中餐",
+    "tags": [
+      "sour",
+      "spicy",
+      "seafood",
+      "soup"
+    ],
+    "taste": "酸辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐟",
+    "weight": 9
+  },
+  {
+    "id": "f013",
+    "name": "宫保虾球",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "seafood",
+      "rice"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🦐",
+    "weight": 7
+  },
+  {
+    "id": "f014",
+    "name": "小炒肉",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "rice"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥓",
+    "weight": 9
+  },
+  {
+    "id": "f015",
+    "name": "地三鲜",
+    "category": "中餐",
+    "tags": [
+      "light",
+      "veggie",
+      "rice"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍆",
+    "weight": 8
+  },
+  {
+    "id": "f016",
+    "name": "青椒肉丝",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🌶️",
+    "weight": 9
+  },
+  {
+    "id": "f017",
+    "name": "醋溜土豆丝",
+    "category": "中餐",
+    "tags": [
+      "sour",
+      "veggie",
+      "rice"
+    ],
+    "taste": "酸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥔",
+    "weight": 9
+  },
+  {
+    "id": "f018",
+    "name": "红烧肉",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice",
+      "heavy"
+    ],
+    "taste": "咸",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🥩",
+    "weight": 8
+  },
+  {
+    "id": "f019",
+    "name": "蒜蓉西兰花",
+    "category": "中餐",
+    "tags": [
+      "light",
+      "veggie",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 1,
+    "emoji": "🥦",
+    "weight": 7
+  },
+  {
+    "id": "f020",
+    "name": "葱爆羊肉",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐑",
+    "weight": 7
+  },
+  {
+    "id": "f021",
+    "name": "辣子鸡",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "heavy"
+    ],
+    "taste": "辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐔",
+    "weight": 8
+  },
+  {
+    "id": "f022",
+    "name": "蛋炒饭",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "rice",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 10
+  },
+  {
+    "id": "f023",
+    "name": "扬州炒饭",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 9
+  },
+  {
+    "id": "f024",
+    "name": "皮蛋瘦肉粥",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "rice",
+      "soup",
+      "comfort"
+    ],
+    "taste": "咸",
+    "scene": "很累模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🥣",
+    "weight": 9
+  },
+  {
+    "id": "f025",
+    "name": "白切鸡",
+    "category": "中餐",
+    "tags": [
+      "light",
+      "meat",
+      "rice"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🐔",
+    "weight": 7
+  },
+  {
+    "id": "f026",
+    "name": "北京烤鸭",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "expensive"
+    ],
+    "taste": "咸",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 3,
+    "emoji": "🦆",
+    "weight": 6
+  },
+  {
+    "id": "f027",
+    "name": "饺子",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "soup"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥟",
+    "weight": 10
+  },
+  {
+    "id": "f028",
+    "name": "馄饨",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "soup",
+      "comfort"
+    ],
+    "taste": "咸",
+    "scene": "很累模式",
+    "mealTime": "晚餐",
+    "priceLevel": 1,
+    "emoji": "🥟",
+    "weight": 9
+  },
+  {
+    "id": "f029",
+    "name": "小笼包",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "soup"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🥟",
+    "weight": 9
+  },
+  {
+    "id": "f030",
+    "name": "红烧牛腩",
+    "category": "中餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🐂",
+    "weight": 8
+  },
+  {
+    "id": "f031",
+    "name": "麻辣火锅",
+    "category": "火锅",
+    "tags": [
+      "spicy",
+      "numb",
+      "hotpot",
+      "heavy"
+    ],
+    "taste": "麻辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🫕",
+    "weight": 8
+  },
+  {
+    "id": "f032",
+    "name": "清汤火锅",
+    "category": "火锅",
+    "tags": [
+      "light",
+      "hotpot",
+      "soup"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🥘",
+    "weight": 7
+  },
+  {
+    "id": "f033",
+    "name": "番茄火锅",
+    "category": "火锅",
+    "tags": [
+      "sweet",
+      "sour",
+      "hotpot",
+      "soup"
+    ],
+    "taste": "酸甜",
+    "scene": "随便吃",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🍅",
+    "weight": 8
+  },
+  {
+    "id": "f034",
+    "name": "重庆老火锅",
+    "category": "火锅",
+    "tags": [
+      "spicy",
+      "numb",
+      "hotpot",
+      "heavy"
+    ],
+    "taste": "麻辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🔥",
+    "weight": 8
+  },
+  {
+    "id": "f035",
+    "name": "潮汕牛肉火锅",
+    "category": "火锅",
+    "tags": [
+      "light",
+      "meat",
+      "hotpot",
+      "soup"
+    ],
+    "taste": "清淡",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐂",
+    "weight": 8
+  },
+  {
+    "id": "f036",
+    "name": "海底捞",
+    "category": "火锅",
+    "tags": [
+      "spicy",
+      "hotpot",
+      "soup"
+    ],
+    "taste": "辣",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 3,
+    "emoji": "🫕",
+    "weight": 7
+  },
+  {
+    "id": "f037",
+    "name": "菌菇火锅",
+    "category": "火锅",
+    "tags": [
+      "light",
+      "veggie",
+      "hotpot",
+      "healthy",
+      "soup"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🍄",
+    "weight": 7
+  },
+  {
+    "id": "f038",
+    "name": "鱼火锅",
+    "category": "火锅",
+    "tags": [
+      "spicy",
+      "seafood",
+      "hotpot",
+      "soup"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐟",
+    "weight": 7
+  },
+  {
+    "id": "f039",
+    "name": "寿喜烧",
+    "category": "火锅",
+    "tags": [
+      "sweet",
+      "salty",
+      "meat",
+      "hotpot"
+    ],
+    "taste": "甜咸",
+    "scene": "随便吃",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🍲",
+    "weight": 7
+  },
+  {
+    "id": "f040",
+    "name": "椰子鸡火锅",
+    "category": "火锅",
+    "tags": [
+      "sweet",
+      "light",
+      "meat",
+      "hotpot",
+      "healthy",
+      "soup"
+    ],
+    "taste": "清甜",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🥥",
+    "weight": 7
+  },
+  {
+    "id": "f041",
+    "name": "麦当劳",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "fried",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍔",
+    "weight": 8
+  },
+  {
+    "id": "f042",
+    "name": "肯德基",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "fried",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍗",
+    "weight": 8
+  },
+  {
+    "id": "f043",
+    "name": "汉堡王",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "fried",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍔",
+    "weight": 7
+  },
+  {
+    "id": "f044",
+    "name": "Subway",
+    "category": "快餐",
+    "tags": [
+      "light",
+      "veggie",
+      "fast",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥪",
+    "weight": 7
+  },
+  {
+    "id": "f045",
+    "name": "沙县小吃",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "fast",
+      "cheap"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥟",
+    "weight": 10
+  },
+  {
+    "id": "f046",
+    "name": "兰州拉面",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "soup",
+      "noodle",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 10
+  },
+  {
+    "id": "f047",
+    "name": "黄焖鸡米饭",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍗",
+    "weight": 9
+  },
+  {
+    "id": "f048",
+    "name": "煲仔饭",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 8
+  },
+  {
+    "id": "f049",
+    "name": "麻辣烫",
+    "category": "快餐",
+    "tags": [
+      "spicy",
+      "veggie",
+      "soup",
+      "fast"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥘",
+    "weight": 10
+  },
+  {
+    "id": "f050",
+    "name": "螺蛳粉",
+    "category": "快餐",
+    "tags": [
+      "sour",
+      "spicy",
+      "noodle",
+      "soup",
+      "heavy"
+    ],
+    "taste": "酸辣",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 8
+  },
+  {
+    "id": "f051",
+    "name": "凉皮",
+    "category": "快餐",
+    "tags": [
+      "sour",
+      "spicy",
+      "cold",
+      "fast",
+      "cheap"
+    ],
+    "taste": "酸辣",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥟",
+    "weight": 8
+  },
+  {
+    "id": "f052",
+    "name": "肉夹馍",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "meat",
+      "fast",
+      "cheap"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥙",
+    "weight": 9
+  },
+  {
+    "id": "f053",
+    "name": "煎饼果子",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "fast",
+      "cheap"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🥞",
+    "weight": 9
+  },
+  {
+    "id": "f054",
+    "name": "酸辣粉",
+    "category": "快餐",
+    "tags": [
+      "sour",
+      "spicy",
+      "noodle",
+      "soup",
+      "fast"
+    ],
+    "taste": "酸辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 9
+  },
+  {
+    "id": "f055",
+    "name": "手抓饼",
+    "category": "快餐",
+    "tags": [
+      "salty",
+      "fast",
+      "cheap"
+    ],
+    "taste": "咸",
+    "scene": "省钱模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🫓",
+    "weight": 8
+  },
+  {
+    "id": "f056",
+    "name": "红烧牛肉面",
+    "category": "面食",
+    "tags": [
+      "salty",
+      "meat",
+      "noodle",
+      "soup"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 9
+  },
+  {
+    "id": "f057",
+    "name": "炸酱面",
+    "category": "面食",
+    "tags": [
+      "salty",
+      "meat",
+      "noodle"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍝",
+    "weight": 8
+  },
+  {
+    "id": "f058",
+    "name": "担担面",
+    "category": "面食",
+    "tags": [
+      "spicy",
+      "meat",
+      "noodle",
+      "heavy"
+    ],
+    "taste": "辣",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 8
+  },
+  {
+    "id": "f059",
+    "name": "热干面",
+    "category": "面食",
+    "tags": [
+      "salty",
+      "noodle",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 8
+  },
+  {
+    "id": "f060",
+    "name": "葱油拌面",
+    "category": "面食",
+    "tags": [
+      "salty",
+      "noodle",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍝",
+    "weight": 8
+  },
+  {
+    "id": "f061",
+    "name": "油泼面",
+    "category": "面食",
+    "tags": [
+      "spicy",
+      "noodle",
+      "heavy"
+    ],
+    "taste": "辣",
+    "scene": "想吃爽一点",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 7
+  },
+  {
+    "id": "f062",
+    "name": "阳春面",
+    "category": "面食",
+    "tags": [
+      "light",
+      "noodle",
+      "soup",
+      "comfort"
+    ],
+    "taste": "清淡",
+    "scene": "很累模式",
+    "mealTime": "晚餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 8
+  },
+  {
+    "id": "f063",
+    "name": "刀削面",
+    "category": "面食",
+    "tags": [
+      "salty",
+      "meat",
+      "noodle",
+      "soup"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 8
+  },
+  {
+    "id": "f064",
+    "name": "乌冬面",
+    "category": "面食",
+    "tags": [
+      "light",
+      "noodle",
+      "soup",
+      "comfort"
+    ],
+    "taste": "清淡",
+    "scene": "很累模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 7
+  },
+  {
+    "id": "f065",
+    "name": "意面",
+    "category": "面食",
+    "tags": [
+      "salty",
+      "meat",
+      "noodle"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍝",
+    "weight": 7
+  },
+  {
+    "id": "f066",
+    "name": "寿司",
+    "category": "日料",
+    "tags": [
+      "light",
+      "seafood",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🍣",
+    "weight": 8
+  },
+  {
+    "id": "f067",
+    "name": "刺身",
+    "category": "日料",
+    "tags": [
+      "light",
+      "seafood",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 3,
+    "emoji": "🍣",
+    "weight": 7
+  },
+  {
+    "id": "f068",
+    "name": "拉面",
+    "category": "日料",
+    "tags": [
+      "salty",
+      "meat",
+      "noodle",
+      "soup",
+      "comfort"
+    ],
+    "taste": "咸",
+    "scene": "很累模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 9
+  },
+  {
+    "id": "f069",
+    "name": "鳗鱼饭",
+    "category": "日料",
+    "tags": [
+      "sweet",
+      "salty",
+      "seafood",
+      "rice"
+    ],
+    "taste": "甜咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🍱",
+    "weight": 7
+  },
+  {
+    "id": "f070",
+    "name": "天妇罗",
+    "category": "日料",
+    "tags": [
+      "light",
+      "seafood",
+      "fried"
+    ],
+    "taste": "清淡",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🍤",
+    "weight": 7
+  },
+  {
+    "id": "f071",
+    "name": "日式咖喱饭",
+    "category": "日料",
+    "tags": [
+      "salty",
+      "rice",
+      "comfort"
+    ],
+    "taste": "咸",
+    "scene": "很累模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍛",
+    "weight": 8
+  },
+  {
+    "id": "f072",
+    "name": "味增汤",
+    "category": "日料",
+    "tags": [
+      "salty",
+      "soup",
+      "light",
+      "healthy"
+    ],
+    "taste": "咸",
+    "scene": "健康模式",
+    "mealTime": "晚餐",
+    "priceLevel": 1,
+    "emoji": "🍲",
+    "weight": 7
+  },
+  {
+    "id": "f073",
+    "name": "牛丼",
+    "category": "日料",
+    "tags": [
+      "sweet",
+      "salty",
+      "meat",
+      "rice",
+      "fast"
+    ],
+    "taste": "甜咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 9
+  },
+  {
+    "id": "f074",
+    "name": "日式定食",
+    "category": "日料",
+    "tags": [
+      "light",
+      "rice",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🍱",
+    "weight": 7
+  },
+  {
+    "id": "f075",
+    "name": "章鱼小丸子",
+    "category": "日料",
+    "tags": [
+      "salty",
+      "seafood",
+      "fried",
+      "fast"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "下午茶",
+    "priceLevel": 1,
+    "emoji": "🐙",
+    "weight": 7
+  },
+  {
+    "id": "f076",
+    "name": "韩式烤肉",
+    "category": "韩餐",
+    "tags": [
+      "salty",
+      "meat",
+      "bbq"
+    ],
+    "taste": "咸",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🥩",
+    "weight": 8
+  },
+  {
+    "id": "f077",
+    "name": "石锅拌饭",
+    "category": "韩餐",
+    "tags": [
+      "spicy",
+      "rice",
+      "veggie"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 8
+  },
+  {
+    "id": "f078",
+    "name": "韩式炸鸡",
+    "category": "韩餐",
+    "tags": [
+      "sweet",
+      "spicy",
+      "meat",
+      "fried"
+    ],
+    "taste": "甜辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 1,
+    "emoji": "🍗",
+    "weight": 8
+  },
+  {
+    "id": "f079",
+    "name": "部队锅",
+    "category": "韩餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "soup",
+      "heavy"
+    ],
+    "taste": "辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🥘",
+    "weight": 7
+  },
+  {
+    "id": "f080",
+    "name": "泡菜汤",
+    "category": "韩餐",
+    "tags": [
+      "spicy",
+      "sour",
+      "soup",
+      "rice"
+    ],
+    "taste": "酸辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥣",
+    "weight": 8
+  },
+  {
+    "id": "f081",
+    "name": "韩式拌面",
+    "category": "韩餐",
+    "tags": [
+      "spicy",
+      "sweet",
+      "noodle",
+      "cold"
+    ],
+    "taste": "甜辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍝",
+    "weight": 7
+  },
+  {
+    "id": "f082",
+    "name": "紫菜包饭",
+    "category": "韩餐",
+    "tags": [
+      "light",
+      "rice",
+      "fast"
+    ],
+    "taste": "清淡",
+    "scene": "省钱模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍙",
+    "weight": 9
+  },
+  {
+    "id": "f083",
+    "name": "参鸡汤",
+    "category": "韩餐",
+    "tags": [
+      "light",
+      "meat",
+      "soup",
+      "healthy",
+      "comfort"
+    ],
+    "taste": "清淡",
+    "scene": "很累模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐔",
+    "weight": 7
+  },
+  {
+    "id": "f084",
+    "name": "三明治",
+    "category": "简餐",
+    "tags": [
+      "light",
+      "fast",
+      "cheap"
+    ],
+    "taste": "清淡",
+    "scene": "省钱模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🥪",
+    "weight": 8
+  },
+  {
+    "id": "f085",
+    "name": "沙拉",
+    "category": "简餐",
+    "tags": [
+      "light",
+      "veggie",
+      "healthy",
+      "cold"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥗",
+    "weight": 7
+  },
+  {
+    "id": "f086",
+    "name": "轻食碗",
+    "category": "简餐",
+    "tags": [
+      "light",
+      "veggie",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🥣",
+    "weight": 7
+  },
+  {
+    "id": "f087",
+    "name": "意式披萨",
+    "category": "简餐",
+    "tags": [
+      "salty",
+      "meat",
+      "fried"
+    ],
+    "taste": "咸",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🍕",
+    "weight": 7
+  },
+  {
+    "id": "f088",
+    "name": "牛油果吐司",
+    "category": "简餐",
+    "tags": [
+      "light",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "早餐",
+    "priceLevel": 2,
+    "emoji": "🥑",
+    "weight": 6
+  },
+  {
+    "id": "f089",
+    "name": "燕麦碗",
+    "category": "简餐",
+    "tags": [
+      "sweet",
+      "healthy",
+      "fast"
+    ],
+    "taste": "甜",
+    "scene": "健康模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🥣",
+    "weight": 7
+  },
+  {
+    "id": "f090",
+    "name": "面包",
+    "category": "简餐",
+    "tags": [
+      "sweet",
+      "fast",
+      "cheap"
+    ],
+    "taste": "甜",
+    "scene": "省钱模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🍞",
+    "weight": 8
+  },
+  {
+    "id": "f091",
+    "name": "酸奶碗",
+    "category": "简餐",
+    "tags": [
+      "sweet",
+      "healthy",
+      "fast"
+    ],
+    "taste": "甜",
+    "scene": "健康模式",
+    "mealTime": "早餐",
+    "priceLevel": 1,
+    "emoji": "🥛",
+    "weight": 7
+  },
+  {
+    "id": "f092",
+    "name": "鸡蛋仔",
+    "category": "简餐",
+    "tags": [
+      "sweet",
+      "fast"
+    ],
+    "taste": "甜",
+    "scene": "随便吃",
+    "mealTime": "下午茶",
+    "priceLevel": 1,
+    "emoji": "🧇",
+    "weight": 7
+  },
+  {
+    "id": "f093",
+    "name": "可丽饼",
+    "category": "简餐",
+    "tags": [
+      "sweet",
+      "fast"
+    ],
+    "taste": "甜",
+    "scene": "随便吃",
+    "mealTime": "下午茶",
+    "priceLevel": 1,
+    "emoji": "🥞",
+    "weight": 6
+  },
+  {
+    "id": "f094",
+    "name": "越南河粉",
+    "category": "简餐",
+    "tags": [
+      "sour",
+      "light",
+      "noodle",
+      "soup",
+      "healthy"
+    ],
+    "taste": "清淡",
+    "scene": "健康模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 8
+  },
+  {
+    "id": "f095",
+    "name": "海南鸡饭",
+    "category": "简餐",
+    "tags": [
+      "light",
+      "meat",
+      "rice"
+    ],
+    "taste": "清淡",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🐔",
+    "weight": 8
+  },
+  {
+    "id": "f096",
+    "name": "咖喱饭",
+    "category": "简餐",
+    "tags": [
+      "spicy",
+      "rice",
+      "comfort"
+    ],
+    "taste": "辣",
+    "scene": "很累模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍛",
+    "weight": 8
+  },
+  {
+    "id": "f097",
+    "name": "卤肉饭",
+    "category": "简餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice",
+      "comfort"
+    ],
+    "taste": "咸",
+    "scene": "很累模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 9
+  },
+  {
+    "id": "f098",
+    "name": "叉烧饭",
+    "category": "简餐",
+    "tags": [
+      "sweet",
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "甜咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍚",
+    "weight": 8
+  },
+  {
+    "id": "f099",
+    "name": "烧鹅饭",
+    "category": "简餐",
+    "tags": [
+      "salty",
+      "meat",
+      "rice"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 2,
+    "emoji": "🍚",
+    "weight": 7
+  },
+  {
+    "id": "f100",
+    "name": "云吞面",
+    "category": "简餐",
+    "tags": [
+      "salty",
+      "meat",
+      "noodle",
+      "soup",
+      "comfort"
+    ],
+    "taste": "咸",
+    "scene": "很累模式",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🍜",
+    "weight": 9
+  },
+  {
+    "id": "f101",
+    "name": "夫妻肺片",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "numb",
+      "meat",
+      "cold",
+      "heavy"
+    ],
+    "taste": "麻辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 1,
+    "emoji": "🥩",
+    "weight": 7
+  },
+  {
+    "id": "f102",
+    "name": "口水鸡",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "numb",
+      "meat",
+      "cold"
+    ],
+    "taste": "麻辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🐔",
+    "weight": 7
+  },
+  {
+    "id": "f103",
+    "name": "酸辣土豆丝",
+    "category": "中餐",
+    "tags": [
+      "sour",
+      "spicy",
+      "veggie",
+      "rice"
+    ],
+    "taste": "酸辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥔",
+    "weight": 8
+  },
+  {
+    "id": "f104",
+    "name": "干煸四季豆",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "veggie",
+      "rice"
+    ],
+    "taste": "辣",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🫘",
+    "weight": 7
+  },
+  {
+    "id": "f105",
+    "name": "蒜泥白肉",
+    "category": "中餐",
+    "tags": [
+      "garlic",
+      "meat",
+      "cold"
+    ],
+    "taste": "咸",
+    "scene": "随便吃",
+    "mealTime": "午餐",
+    "priceLevel": 1,
+    "emoji": "🥓",
+    "weight": 7
+  },
+  {
+    "id": "f106",
+    "name": "毛血旺",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "numb",
+      "meat",
+      "heavy",
+      "soup"
+    ],
+    "taste": "麻辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🥘",
+    "weight": 7
+  },
+  {
+    "id": "f107",
+    "name": "大盘鸡",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "meat",
+      "rice",
+      "noodle"
+    ],
+    "taste": "辣",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐔",
+    "weight": 7
+  },
+  {
+    "id": "f108",
+    "name": "烤鱼",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "seafood",
+      "bbq"
+    ],
+    "taste": "辣",
+    "scene": "聚餐模式",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐟",
+    "weight": 8
+  },
+  {
+    "id": "f109",
+    "name": "酸汤肥牛",
+    "category": "中餐",
+    "tags": [
+      "sour",
+      "spicy",
+      "meat",
+      "soup",
+      "rice"
+    ],
+    "taste": "酸辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🐂",
+    "weight": 8
+  },
+  {
+    "id": "f110",
+    "name": "麻辣香锅",
+    "category": "中餐",
+    "tags": [
+      "spicy",
+      "numb",
+      "meat",
+      "heavy"
+    ],
+    "taste": "麻辣",
+    "scene": "想吃爽一点",
+    "mealTime": "晚餐",
+    "priceLevel": 2,
+    "emoji": "🥘",
+    "weight": 8
+  }
+]
