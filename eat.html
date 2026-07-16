@@ -165,27 +165,23 @@ html, body {
 }
 
 .scene-selector {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  overflow-x: auto;
   padding: 4px 0 12px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
-.scene-selector::-webkit-scrollbar { display: none; }
 
 .scene-chip {
-  flex-shrink: 0;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
   background: var(--card-bg);
   border: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;
   font-family: inherit;
   color: var(--text);
+  text-align: center;
 }
 
 .scene-chip.active {
@@ -195,6 +191,32 @@ html, body {
 }
 
 .scene-chip:active {
+  transform: scale(0.95);
+}
+
+.cat-filter-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.cat-filter-btn .cat-emoji { font-size: 22px; }
+.cat-filter-btn.active {
+  border-color: var(--accent);
+  background: var(--accent)0a;
+}
+
+.cat-filter-btn:active {
   transform: scale(0.95);
 }
 
@@ -241,28 +263,7 @@ html, body {
   gap: 10px;
 }
 
-.quick-cat-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 12px 4px;
-  border-radius: var(--radius-sm);
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  color: var(--text);
-}
-
-.quick-cat-btn:active {
-  transform: scale(0.95);
-  opacity: 0.8;
-}
-
-.quick-cat-btn .cat-emoji { font-size: 26px; }
-.quick-cat-btn .cat-label { font-size: 12px; color: var(--text-secondary); }
+/* cat-filter-btn styles defined above */
 
 #recommend-view { display: none; }
 
@@ -866,6 +867,7 @@ html, body {
           <button class="scene-chip active" data-scene="随便吃">🤷 随便吃</button>
           <button class="scene-chip" data-scene="想吃爽一点">😋 想吃爽</button>
           <button class="scene-chip" data-scene="健康模式">🥗 健康</button>
+          <button class="scene-chip" data-scene="减肥模式">🏃 减肥</button>
           <button class="scene-chip" data-scene="省钱模式">💰 省钱</button>
           <button class="scene-chip" data-scene="很累模式">😴 很累</button>
           <button class="scene-chip" data-scene="聚餐模式">👥 聚餐</button>
@@ -874,14 +876,14 @@ html, body {
         <button class="decide-btn" id="btn-decide">🎲 帮我决定</button>
         <div class="home-stats" id="home-stats-extra"></div>
 
-        <div class="quick-categories">
-          <button class="quick-cat-btn" data-cat="中餐"><span class="cat-emoji">🥟</span><span class="cat-label">中餐</span></button>
-          <button class="quick-cat-btn" data-cat="火锅"><span class="cat-emoji">🫕</span><span class="cat-label">火锅</span></button>
-          <button class="quick-cat-btn" data-cat="快餐"><span class="cat-emoji">🍔</span><span class="cat-label">快餐</span></button>
-          <button class="quick-cat-btn" data-cat="面食"><span class="cat-emoji">🍜</span><span class="cat-label">面食</span></button>
-          <button class="quick-cat-btn" data-cat="日料"><span class="cat-emoji">🍣</span><span class="cat-label">日料</span></button>
-          <button class="quick-cat-btn" data-cat="韩餐"><span class="cat-emoji">🥩</span><span class="cat-label">韩餐</span></button>
-          <button class="quick-cat-btn" data-cat="简餐"><span class="cat-emoji">🥗</span><span class="cat-label">简餐</span></button>
+        <div class="quick-categories" id="category-filters">
+          <button class="cat-filter-btn" data-cat="中餐"><span class="cat-emoji">🥟</span><span class="cat-label">中餐</span></button>
+          <button class="cat-filter-btn" data-cat="火锅"><span class="cat-emoji">🫕</span><span class="cat-label">火锅</span></button>
+          <button class="cat-filter-btn" data-cat="快餐"><span class="cat-emoji">🍔</span><span class="cat-label">快餐</span></button>
+          <button class="cat-filter-btn" data-cat="面食"><span class="cat-emoji">🍜</span><span class="cat-label">面食</span></button>
+          <button class="cat-filter-btn" data-cat="日料"><span class="cat-emoji">🍣</span><span class="cat-label">日料</span></button>
+          <button class="cat-filter-btn" data-cat="韩餐"><span class="cat-emoji">🥩</span><span class="cat-label">韩餐</span></button>
+          <button class="cat-filter-btn" data-cat="简餐"><span class="cat-emoji">🥗</span><span class="cat-label">简餐</span></button>
         </div>
       </div>
 
@@ -924,6 +926,7 @@ html, body {
           <option value="随便吃">🤷 随便吃</option>
           <option value="想吃爽一点">😋 想吃爽一点</option>
           <option value="健康模式">🥗 健康模式</option>
+          <option value="减肥模式">🏃 减肥模式</option>
           <option value="省钱模式">💰 省钱模式</option>
           <option value="很累模式">😴 很累模式</option>
           <option value="聚餐模式">👥 聚餐模式</option>
@@ -966,6 +969,7 @@ html, body {
               <option value="随便吃">🤷 随便吃</option>
               <option value="想吃爽一点">😋 想吃爽一点</option>
               <option value="健康模式">🥗 健康模式</option>
+              <option value="减肥模式">🏃 减肥模式</option>
               <option value="省钱模式">💰 省钱模式</option>
               <option value="很累模式">😴 很累模式</option>
               <option value="聚餐模式">👥 聚餐模式</option>
@@ -1063,7 +1067,7 @@ html, body {
       <div class="form-group">
         <label class="form-label">场景</label>
         <select class="form-input" id="food-scene">
-          <option>随便吃</option><option>想吃爽一点</option><option>健康模式</option>
+          <option>随便吃</option><option>想吃爽一点</option><option>健康模式</option><option>减肥模式</option>
           <option>省钱模式</option><option>很累模式</option><option>聚餐模式</option>
         </select>
       </div>
@@ -1238,7 +1242,18 @@ var FOODS_DATA = [
   {"id":"f107","name":"大盘鸡","category":"中餐","tags":["spicy","meat","rice","noodle"],"taste":"辣","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐔","weight":7},
   {"id":"f108","name":"烤鱼","category":"中餐","tags":["spicy","seafood","bbq"],"taste":"辣","scene":"聚餐模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":8},
   {"id":"f109","name":"酸汤肥牛","category":"中餐","tags":["sour","spicy","meat","soup","rice"],"taste":"酸辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🐂","weight":8},
-  {"id":"f110","name":"麻辣香锅","category":"中餐","tags":["spicy","numb","meat","heavy"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🥘","weight":8}
+  {"id":"f110","name":"麻辣香锅","category":"中餐","tags":["spicy","numb","meat","heavy"],"taste":"麻辣","scene":"想吃爽一点","mealTime":"晚餐","priceLevel":2,"emoji":"🥘","weight":8},
+  {"id":"f111","name":"鸡胸肉沙拉","category":"简餐","tags":["healthy","light","meat"],"taste":"清淡","scene":"减肥模式","mealTime":"午餐","priceLevel":1,"emoji":"🥗","weight":8},
+  {"id":"f112","name":"蔬菜沙拉","category":"简餐","tags":["healthy","light","veggie"],"taste":"清淡","scene":"减肥模式","mealTime":"午餐","priceLevel":1,"emoji":"🥬","weight":8},
+  {"id":"f113","name":"蒸糙米饭","category":"简餐","tags":["healthy","light","rice","veggie"],"taste":"清淡","scene":"减肥模式","mealTime":"午餐","priceLevel":1,"emoji":"🍚","weight":7},
+  {"id":"f114","name":"水煮虾","category":"简餐","tags":["healthy","light","seafood"],"taste":"清淡","scene":"减肥模式","mealTime":"晚餐","priceLevel":2,"emoji":"🦐","weight":8},
+  {"id":"f115","name":"冬瓜汤","category":"简餐","tags":["healthy","light","veggie","soup"],"taste":"清淡","scene":"减肥模式","mealTime":"晚餐","priceLevel":1,"emoji":"🥣","weight":7},
+  {"id":"f116","name":"清蒸鱼","category":"中餐","tags":["healthy","light","seafood","rice"],"taste":"清淡","scene":"减肥模式","mealTime":"晚餐","priceLevel":2,"emoji":"🐟","weight":8},
+  {"id":"f117","name":"藜麦碗","category":"简餐","tags":["healthy","light","veggie"],"taste":"清淡","scene":"减肥模式","mealTime":"午餐","priceLevel":2,"emoji":"🌾","weight":7},
+  {"id":"f118","name":"蛋白奶昔","category":"简餐","tags":["healthy","light","fast"],"taste":"清淡","scene":"减肥模式","mealTime":"早餐","priceLevel":1,"emoji":"🥛","weight":7},
+  {"id":"f119","name":"凉拌鸡丝","category":"中餐","tags":["healthy","light","meat","cold"],"taste":"清淡","scene":"减肥模式","mealTime":"午餐","priceLevel":1,"emoji":"🥗","weight":8},
+  {"id":"f120","name":"番茄蔬菜汤","category":"简餐","tags":["healthy","light","veggie","soup"],"taste":"清淡","scene":"减肥模式","mealTime":"晚餐","priceLevel":1,"emoji":"🍅","weight":7},
+
 ];
 
 // ====== 提示语 ======
@@ -1521,6 +1536,14 @@ const Recommender = (() => {
       } else if (scene === '健康模式') {
         if (food.tags.includes('healthy')) score += PRICE_SCORE * 2;
         if (food.tags.includes('fried')) score -= PRICE_SCORE;
+      } else if (scene === '减肥模式') {
+        if (food.tags.includes('healthy')) score += PRICE_SCORE * 3;
+        if (food.tags.includes('light')) score += PRICE_SCORE * 2;
+        if (food.tags.includes('veggie')) score += PRICE_SCORE;
+        if (food.tags.includes('fried')) score -= PRICE_SCORE * 2;
+        if (food.tags.includes('heavy')) score -= PRICE_SCORE * 2;
+        if (food.priceLevel >= 2) score += PRICE_SCORE;  // better ingredients cost more
+        if (food.priceLevel === 1) score += PRICE_SCORE;
       } else if (scene === '想吃爽一点') {
         if (food.tags.includes('heavy') || food.tags.includes('meat') || food.tags.includes('fried')) {
           score += PRICE_SCORE;
@@ -1580,6 +1603,7 @@ const App = (() => {
   let preferences = {};
   let history = [];
   let currentFood = null;
+  let selectedCategories = [];
   function getCurrentScene() {
     const active = document.querySelector('.scene-chip.active');
     return active ? active.dataset.scene : '随便吃';
@@ -1667,6 +1691,20 @@ const App = (() => {
       chip.classList.add('active');
     });
 
+    // Category filters
+    document.getElementById('category-filters').addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-filter-btn');
+      if (!btn) return;
+      btn.classList.toggle('active');
+      const cat = btn.dataset.cat;
+      const idx = selectedCategories.indexOf(cat);
+      if (idx >= 0) {
+        selectedCategories.splice(idx, 1);
+      } else {
+        selectedCategories.push(cat);
+      }
+    });
+
     // Onboarding
     document.getElementById('btn-onboarding-done').addEventListener('click', handleOnboardingDone);
 
@@ -1742,7 +1780,11 @@ const App = (() => {
 
     // Animate
     animateRecommend(() => {
-      const result = Recommender.recommend(foods, preferences, getCurrentScene(), history);
+      let pool = foods;
+      if (selectedCategories.length > 0) {
+        pool = foods.filter(f => selectedCategories.includes(f.category));
+      }
+      const result = Recommender.recommend(pool, preferences, getCurrentScene(), history);
       currentFood = result;
       showRecommendResult(result);
       btn.disabled = false;
@@ -1823,7 +1865,11 @@ const App = (() => {
 
   function handleRetry() {
     if (!currentFood) return;
-    const newResult = Recommender.recommendNext(foods, preferences, getCurrentScene(), history, currentFood.id);
+    let pool = foods;
+    if (selectedCategories.length > 0) {
+      pool = foods.filter(f => selectedCategories.includes(f.category));
+    }
+    const newResult = Recommender.recommendNext(pool, preferences, getCurrentScene(), history, currentFood.id);
     currentFood = newResult;
     showRecommendResult(newResult);
   }
