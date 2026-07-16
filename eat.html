@@ -354,6 +354,19 @@ html, body {
 
 .btn-accept { background: var(--green); color: white; }
 .btn-retry { background: var(--card-bg); color: var(--text); border: 1px solid var(--border) !important; }
+.btn-back {
+  display:inline-block;
+  padding:8px 20px;
+  border-radius:20px;
+  border:none;
+  background:transparent;
+  color:var(--text-secondary);
+  font-size:14px;
+  cursor:pointer;
+  font-family:inherit;
+  transition:all 0.15s;
+}
+.btn-back:active { opacity:0.5; }
 
 #recommend-animation {
   display: none;
@@ -909,6 +922,9 @@ html, body {
           <div class="recommend-actions">
             <button class="btn-accept" id="btn-accept">✅ 就吃这个</button>
             <button class="btn-retry" id="btn-retry">🔄 换一个</button>
+          </div>
+          <div style="text-align:center;margin-top:10px">
+            <button class="btn-back" id="btn-back">← 返回</button>
           </div>
         </div>
       </div>
@@ -1682,6 +1698,7 @@ const App = (() => {
     // Accept / Retry
     document.getElementById('btn-accept').addEventListener('click', handleAccept);
     document.getElementById('btn-retry').addEventListener('click', handleRetry);
+    document.getElementById('btn-back').addEventListener('click', handleBack);
 
     // Scene selector
     document.getElementById('scene-selector').addEventListener('click', (e) => {
@@ -1857,10 +1874,17 @@ const App = (() => {
       Storage.addHistory(currentFood.id, getCurrentScene());
       history.push({ foodId: currentFood.id, scene: getCurrentScene(), timestamp: Date.now() });
     }
-    // Back to home
+    backToHome();
+  }
+
+  function backToHome() {
     document.getElementById('home-content').style.display = 'block';
     document.getElementById('recommend-view').style.display = 'none';
     renderHomeStats();
+  }
+
+  function handleBack() {
+    backToHome();
   }
 
   function handleRetry() {
